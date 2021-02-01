@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:manutencao_parse/screen/base/base_Screen.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:get_it/get_it.dart';
+import 'package:manutencao_parse/stores/page_store.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeParse();
-
+  setupLocators();
   runApp(MyApp());
+}
+
+void setupLocators() {
+  GetIt.I.registerSingleton(PageStore());
 }
 
 class MyApp extends StatelessWidget {
