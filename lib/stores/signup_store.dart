@@ -13,7 +13,7 @@ abstract class _SignupStore with Store {
   void setName(String value) => name = value;
 
   @computed
-  bool get nameValid => name != null && name.length > 6;
+  bool get nameValid => name != null && name.length > 2;
   String get nameError {
     if (name == null || nameValid)
       return null;
@@ -92,4 +92,19 @@ abstract class _SignupStore with Store {
   @computed
   bool get isFormValid =>
       nameValid && emailValid && phoneValid && pass1Valid && pass2Valid;
+
+  @computed
+  Function get signupPressed => (isFormValid && !loading) ? _signUp : null;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> _signUp() async {
+    loading = true;
+
+    await Future.delayed(Duration(seconds: 3));
+
+    loading = false;
+  }
 }
