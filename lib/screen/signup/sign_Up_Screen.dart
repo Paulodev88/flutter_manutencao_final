@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/componets/error_box.dart';
 import 'package:manutencao_parse/screen/signup/components/field_title.dart';
 import 'package:manutencao_parse/stores/signup_store.dart';
 
@@ -33,6 +34,9 @@ class SignUpScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisSize: MainAxisSize.min,
                     children: [
+                      Observer(builder: (_) {
+                        return ErrorBox(message: signupStore.error);
+                      }),
                       FieldTitle("Nome", "Como aparecerá em suas manutenções."),
                       Observer(builder: (_) {
                         return TextField(

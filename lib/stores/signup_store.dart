@@ -1,3 +1,5 @@
+import 'package:manutencao_parse/models/user.dart';
+import 'package:manutencao_parse/repositories/user_repository.dart';
 import 'package:mobx/mobx.dart';
 import 'package:manutencao_parse/helpers/extensions.dart';
 
@@ -99,11 +101,20 @@ abstract class _SignupStore with Store {
   @observable
   bool loading = false;
 
+  @observable
+  String error;
+
   @action
   Future<void> _signUp() async {
     loading = true;
 
-    await Future.delayed(Duration(seconds: 3));
+    final user = User(name: name, email: email, phone: phone, password: pass1);
+
+    try {
+      await UserRepository().signUp(user);
+    } catch (e) {
+      error = e;
+    }
 
     loading = false;
   }
