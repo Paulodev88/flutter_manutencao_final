@@ -10,6 +10,13 @@ class PageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(
+          height: 24,
+        ),
+        Text(
+          "Manutenções da SCI",
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
+        ),
         PageTile(
           label: "Manutenções",
           iconData: Icons.format_list_bulleted,

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:manutencao_parse/screen/signup/sign_Up_Screen.dart';
+import 'package:manutencao_parse/stores/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
+  final LoginStore loginStore = LoginStore();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +42,16 @@ class LoginScreen extends StatelessWidget {
                             fontWeight: FontWeight.w700),
                       ),
                     ),
-                    TextField(
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(), isDense: true),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
+                    Observer(builder: (_) {
+                      return TextField(
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: loginStore.emailError),
+                        keyboardType: TextInputType.emailAddress,
+                        onChanged: loginStore.setEmail,
+                      );
+                    }),
                     const SizedBox(
                       height: 16,
                     ),
@@ -72,25 +80,33 @@ class LoginScreen extends StatelessWidget {
                             )
                           ],
                         )),
-                    TextField(
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(), isDense: true),
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Container(
-                      height: 40,
-                      margin: const EdgeInsets.only(top: 20, bottom: 20),
-                      child: RaisedButton(
-                        color: Colors.yellow,
-                        onPressed: () {},
-                        child: Text("ENTRAR"),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                      ),
-                    ),
+                    Observer(builder: (_) {
+                      return TextField(
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            isDense: true,
+                            errorText: loginStore.passwordError),
+                        obscureText: true,
+                        onChanged: loginStore.setPassword,
+                      );
+                    }),
+                    Observer(builder: (_) {
+                      return Container(
+                        height: 40,
+                        margin: const EdgeInsets.only(top: 20, bottom: 20),
+                        child: RaisedButton(
+                          color: Colors.purple,
+                          disabledColor: Colors.purple[100],
+                          onPressed: loginStore.loginPressed,
+                          child: Text(
+                            "ENTRAR",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                      );
+                    }),
                     Divider(color: Colors.black),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8),
