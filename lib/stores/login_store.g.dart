@@ -61,6 +61,28 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_LoginStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$_loginAsyncAction = AsyncAction('_LoginStore._login');
+
+  @override
+  Future<void> _login() {
+    return _$_loginAsyncAction.run(() => super._login());
+  }
+
   final _$_LoginStoreActionController = ActionController(name: '_LoginStore');
 
   @override
@@ -90,6 +112,7 @@ mixin _$LoginStore on _LoginStore, Store {
     return '''
 email: ${email},
 password: ${password},
+loading: ${loading},
 emailValid: ${emailValid},
 passwordValid: ${passwordValid},
 loginPressed: ${loginPressed}

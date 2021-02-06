@@ -44,6 +44,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Observer(builder: (_) {
                       return TextField(
+                        enabled: !loginStore.loading,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
@@ -82,6 +83,7 @@ class LoginScreen extends StatelessWidget {
                         )),
                     Observer(builder: (_) {
                       return TextField(
+                        enabled: !loginStore.loading,
                         decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             isDense: true,
@@ -98,10 +100,15 @@ class LoginScreen extends StatelessWidget {
                           color: Colors.purple,
                           disabledColor: Colors.purple[100],
                           onPressed: loginStore.loginPressed,
-                          child: Text(
-                            "ENTRAR",
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          child: loginStore.loading
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : Text(
+                                  "ENTRAR",
+                                  style: TextStyle(color: Colors.white),
+                                ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20)),
                         ),

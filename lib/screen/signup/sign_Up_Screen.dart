@@ -126,15 +126,16 @@ class SignUpScreen extends StatelessWidget {
                             height: 40,
                             margin: const EdgeInsets.only(top: 20, bottom: 20),
                             child: RaisedButton(
-                              color: Colors.yellow,
-                              disabledColor: Colors.yellow[200],
+                              color: Colors.purple,
+                              disabledColor: Colors.purple[100],
                               onPressed: signupStore.signupPressed,
                               child: signupStore.loading
                                   ? CircularProgressIndicator(
                                       valueColor:
-                                          AlwaysStoppedAnimation(Colors.black),
+                                          AlwaysStoppedAnimation(Colors.white),
                                     )
-                                  : Text("CADASTRAR"),
+                                  : Text("CADASTRAR",
+                                      style: TextStyle(color: Colors.white)),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20)),
                             ),

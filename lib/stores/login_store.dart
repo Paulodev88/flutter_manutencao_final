@@ -29,5 +29,17 @@ abstract class _LoginStore with Store {
       password == null || passwordValid ? null : "Senha inválida";
 
   @computed
-  Function get loginPressed => emailValid && passwordValid ? () {} : null;
+  Function get loginPressed =>
+      emailValid && passwordValid && !loading ? _login : null;
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> _login() async {
+    loading = true;
+    await Future.delayed(Duration(seconds: 3));
+
+    loading = false;
+  }
 }
