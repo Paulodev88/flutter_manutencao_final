@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: Colors.blue[700],
-        appBarTheme: AppBarTheme(elevation: 0, color: Colors.blue[700]),
+        scaffoldBackgroundColor: Colors.transparent,
+        appBarTheme: AppBarTheme(elevation: 0, color: Colors.transparent),
       ),
       home: BaseScreen(),
     );

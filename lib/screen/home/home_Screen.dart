@@ -5,12 +5,24 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Manutenções da SCI"),
-          centerTitle: true,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.blue[800],
+              Colors.blue[400],
+            ],
+          ),
         ),
-        drawer: CustomDrawer(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Manutenções da SCI"),
+            centerTitle: true,
+          ),
+          drawer: CustomDrawer(),
+        ),
       ),
     );
   }
