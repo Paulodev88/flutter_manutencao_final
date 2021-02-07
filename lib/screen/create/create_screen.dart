@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
+import 'package:manutencao_parse/screen/create/components/category_field.dart';
+import 'package:manutencao_parse/screen/create/components/unidade_field.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
 import 'components/images_field.dart';
 
@@ -98,6 +100,8 @@ class CreateScreen extends StatelessWidget {
                       contentPadding: contentPadding,
                     ),
                   ),
+                  CategoryField(createStore),
+                  UnidadeField(createStore)
                 ],
               ),
             ),
