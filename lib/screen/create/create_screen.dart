@@ -35,6 +35,7 @@ class CreateScreen extends StatelessWidget {
           ),
           drawer: CustomDrawer(),
           body: Card(
+            clipBehavior: Clip.antiAlias,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             elevation: 8,
