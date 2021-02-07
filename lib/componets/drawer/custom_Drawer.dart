@@ -11,11 +11,23 @@ class CustomDrawer extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.65,
         child: Drawer(
-          child: ListView(
-            children: [
-              CustomDrawerHeader(),
-              PageSection(),
-            ],
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.blue[100],
+                  Colors.white,
+                ],
+              ),
+            ),
+            child: ListView(
+              children: [
+                CustomDrawerHeader(),
+                PageSection(),
+              ],
+            ),
           ),
         ),
       ),

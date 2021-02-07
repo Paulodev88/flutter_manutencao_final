@@ -23,12 +23,12 @@ class CustomDrawerHeader extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
         height: 100,
-        color: Colors.blue[700],
+        color: Colors.transparent,
         child: Row(
           children: [
             Icon(
               Icons.account_circle,
-              color: Colors.white,
+              color: Colors.purple[900],
               size: 35,
             ),
             const SizedBox(
@@ -44,7 +44,7 @@ class CustomDrawerHeader extends StatelessWidget {
                       ? userMenagerStore.user.name
                       : "Acesse sua conta!",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.purple[900],
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
                 ),
@@ -53,7 +53,7 @@ class CustomDrawerHeader extends StatelessWidget {
                         ? userMenagerStore.user.email
                         : "Clique aqui.",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.purple[900],
                         fontSize: 14,
                         fontWeight: FontWeight.w400)),
               ],
