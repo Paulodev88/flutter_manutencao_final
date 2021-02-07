@@ -18,70 +18,95 @@ class ImagesField extends StatelessWidget {
       Navigator.of(context).pop();
     }
 
-    return Container(
-        color: Colors.transparent,
-        height: 200,
-        child: Observer(builder: (_) {
-          return ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: createStore.images.length < 5
-                ? createStore.images.length + 1
-                : 5,
-            itemBuilder: (_, index) {
-              if (index == createStore.images.length)
-                return Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
-                  child: GestureDetector(
-                    onTap: () {
-                      if (Platform.isAndroid) {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (_) => ImageSourceModal(onImageSelected),
-                        );
-                      } else {
-                        showCupertinoModalPopup(
-                          context: context,
-                          builder: (_) => ImageSourceModal(onImageSelected),
-                        );
-                      }
-                    },
-                    child: CircleAvatar(
-                      radius: 75,
-                      backgroundColor: Colors.grey[300],
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.camera_alt,
-                            size: 75,
-                            color: Colors.white,
-                          ),
-                        ],
+    return Column(
+      children: [
+        Container(
+          color: Colors.transparent,
+          height: 200,
+          child: Observer(builder: (_) {
+            return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: createStore.images.length < 5
+                  ? createStore.images.length + 1
+                  : 5,
+              itemBuilder: (_, index) {
+                if (index == createStore.images.length)
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 25, 0, 25),
+                    child: GestureDetector(
+                      onTap: () {
+                        if (Platform.isAndroid) {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (_) => ImageSourceModal(onImageSelected),
+                          );
+                        } else {
+                          showCupertinoModalPopup(
+                            context: context,
+                            builder: (_) => ImageSourceModal(onImageSelected),
+                          );
+                        }
+                      },
+                      child: CircleAvatar(
+                        radius: 75,
+                        backgroundColor: Colors.grey[300],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.camera_alt,
+                              size: 75,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                );
-              else
-                return Padding(
-                  padding: EdgeInsets.fromLTRB(8, 8, index == 4 ? 8 : 0, 8),
-                  child: GestureDetector(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (_) => ImageDialog(
-                                image: createStore.images[index],
-                                onDelete: () =>
-                                    createStore.images.removeAt(index),
-                              ));
-                    },
-                    child: CircleAvatar(
-                      radius: 75,
-                      backgroundImage: FileImage(createStore.images[index]),
+                  );
+                else
+                  return Padding(
+                    padding: EdgeInsets.fromLTRB(8, 8, index == 4 ? 8 : 0, 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (_) => ImageDialog(
+                                  image: createStore.images[index],
+                                  onDelete: () =>
+                                      createStore.images.removeAt(index),
+                                ));
+                      },
+                      child: CircleAvatar(
+                        radius: 75,
+                        backgroundImage: FileImage(createStore.images[index]),
+                      ),
                     ),
+                  );
+              },
+            );
+          }),
+        ),
+        Observer(
+          builder: (_) {
+            if (createStore.imageError != null)
+              return Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.red),
                   ),
-                );
-            },
-          );
-        }));
+                ),
+                padding: const EdgeInsets.fromLTRB(16, 8, 0, 0),
+                child: Text(
+                  createStore.imageError,
+                  style: TextStyle(color: Colors.red[800], fontSize: 13),
+                ),
+              );
+            else
+              return Container();
+          },
+        )
+      ],
+    );
   }
 }
