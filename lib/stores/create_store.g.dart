@@ -37,6 +37,33 @@ mixin _$CreateStore on _CreateStore, Store {
       (_$unidadeValidComputed ??= Computed<bool>(() => super.unidadeValid,
               name: '_CreateStore.unidadeValid'))
           .value;
+  Computed<bool> _$problemaIsValidComputed;
+
+  @override
+  bool get problemaIsValid =>
+      (_$problemaIsValidComputed ??= Computed<bool>(() => super.problemaIsValid,
+              name: '_CreateStore.problemaIsValid'))
+          .value;
+  Computed<bool> _$solucaoIsValidComputed;
+
+  @override
+  bool get solucaoIsValid =>
+      (_$solucaoIsValidComputed ??= Computed<bool>(() => super.solucaoIsValid,
+              name: '_CreateStore.solucaoIsValid'))
+          .value;
+  Computed<bool> _$formValidComputed;
+
+  @override
+  bool get formValid => (_$formValidComputed ??=
+          Computed<bool>(() => super.formValid, name: '_CreateStore.formValid'))
+      .value;
+  Computed<Function> _$sendPressedComputed;
+
+  @override
+  Function get sendPressed =>
+      (_$sendPressedComputed ??= Computed<Function>(() => super.sendPressed,
+              name: '_CreateStore.sendPressed'))
+          .value;
 
   final _$titleAtom = Atom(name: '_CreateStore.title');
 
@@ -83,6 +110,51 @@ mixin _$CreateStore on _CreateStore, Store {
     });
   }
 
+  final _$problemaAtom = Atom(name: '_CreateStore.problema');
+
+  @override
+  String get problema {
+    _$problemaAtom.reportRead();
+    return super.problema;
+  }
+
+  @override
+  set problema(String value) {
+    _$problemaAtom.reportWrite(value, super.problema, () {
+      super.problema = value;
+    });
+  }
+
+  final _$solucaoAtom = Atom(name: '_CreateStore.solucao');
+
+  @override
+  String get solucao {
+    _$solucaoAtom.reportRead();
+    return super.solucao;
+  }
+
+  @override
+  set solucao(String value) {
+    _$solucaoAtom.reportWrite(value, super.solucao, () {
+      super.solucao = value;
+    });
+  }
+
+  final _$showErrorsAtom = Atom(name: '_CreateStore.showErrors');
+
+  @override
+  bool get showErrors {
+    _$showErrorsAtom.reportRead();
+    return super.showErrors;
+  }
+
+  @override
+  set showErrors(bool value) {
+    _$showErrorsAtom.reportWrite(value, super.showErrors, () {
+      super.showErrors = value;
+    });
+  }
+
   final _$_CreateStoreActionController = ActionController(name: '_CreateStore');
 
   @override
@@ -119,15 +191,55 @@ mixin _$CreateStore on _CreateStore, Store {
   }
 
   @override
+  void setProblema(String value) {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.setProblema');
+    try {
+      return super.setProblema(value);
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setSolucao(String value) {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.setSolucao');
+    try {
+      return super.setSolucao(value);
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void invalidSendPressed() {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.invalidSendPressed');
+    try {
+      return super.invalidSendPressed();
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 title: ${title},
 category: ${category},
 unidade: ${unidade},
+problema: ${problema},
+solucao: ${solucao},
+showErrors: ${showErrors},
 imagesValid: ${imagesValid},
 nameIsValid: ${nameIsValid},
 categoryValid: ${categoryValid},
-unidadeValid: ${unidadeValid}
+unidadeValid: ${unidadeValid},
+problemaIsValid: ${problemaIsValid},
+solucaoIsValid: ${solucaoIsValid},
+formValid: ${formValid},
+sendPressed: ${sendPressed}
     ''';
   }
 }

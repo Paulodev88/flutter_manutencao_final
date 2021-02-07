@@ -109,34 +109,51 @@ class CreateScreen extends StatelessWidget {
                     ),
                     CategoryField(createStore),
                     UnidadeField(createStore),
-                    TextFormField(
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        labelText: "Problema",
-                        labelStyle: labelStyle,
-                        contentPadding: contentPadding,
-                      ),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                        onChanged: createStore.setProblema,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                            labelText: "Problema",
+                            labelStyle: labelStyle,
+                            contentPadding: contentPadding,
+                            errorText: createStore.probelmaError),
+                      );
+                    }),
+                    Observer(
+                      builder: (_) {
+                        return TextFormField(
+                          onChanged: createStore.setSolucao,
+                          maxLines: null,
+                          decoration: InputDecoration(
+                              labelText: "Solução",
+                              labelStyle: labelStyle,
+                              contentPadding: contentPadding,
+                              errorText: createStore.solucaoError),
+                        );
+                      },
                     ),
-                    TextFormField(
-                      maxLines: null,
-                      decoration: InputDecoration(
-                        labelText: "Solução",
-                        labelStyle: labelStyle,
-                        contentPadding: contentPadding,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: RaisedButton(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        onPressed: () {},
-                        child: Text(
-                          "Salvar",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
-                        ),
-                        color: Colors.purple,
-                        disabledColor: Colors.purple[100],
-                      ),
+                    Observer(
+                      builder: (_) {
+                        return SizedBox(
+                          height: 50,
+                          child: GestureDetector(
+                            onTap: createStore.invalidSendPressed,
+                            child: RaisedButton(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              onPressed: createStore.sendPressed,
+                              child: Text(
+                                "Salvar",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 18),
+                              ),
+                              color: Colors.purple,
+                              disabledColor: Colors.purple[100],
+                            ),
+                          ),
+                        );
+                      },
                     )
                   ],
                 ),
@@ -146,5 +163,3 @@ class CreateScreen extends StatelessWidget {
         ));
   }
 }
-
-//maxlines: null
