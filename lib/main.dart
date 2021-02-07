@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manutencao_parse/screen/base/base_Screen.dart';
+import 'package:manutencao_parse/stores/category_store.dart';
+import 'package:manutencao_parse/stores/unidade_store.dart';
 import 'package:manutencao_parse/stores/user_menager_store.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:get_it/get_it.dart';
@@ -15,6 +17,8 @@ void main() async {
 void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(UserMenagerStore());
+  GetIt.I.registerSingleton(CategoryStore());
+  GetIt.I.registerSingleton(UnidadeStore());
 }
 
 class MyApp extends StatelessWidget {

@@ -5,10 +5,7 @@ class Unidade {
   final String unidade;
   final String id;
 
-  Unidade(
-    this.id, {
-    this.unidade,
-  });
+  Unidade({this.id, this.unidade});
 
   Unidade.fromParse(ParseObject parseObject)
       : id = parseObject.objectId,
