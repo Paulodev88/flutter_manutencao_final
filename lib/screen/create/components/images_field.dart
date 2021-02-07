@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/screen/create/components/image_dialog.dart';
 import 'package:manutencao_parse/screen/create/components/image_source_modal.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
 
@@ -64,7 +65,15 @@ class ImagesField extends StatelessWidget {
                 return Padding(
                   padding: EdgeInsets.fromLTRB(8, 8, index == 4 ? 8 : 0, 8),
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (_) => ImageDialog(
+                                image: createStore.images[index],
+                                onDelete: () =>
+                                    createStore.images.removeAt(index),
+                              ));
+                    },
                     child: CircleAvatar(
                       radius: 75,
                       backgroundImage: FileImage(createStore.images[index]),
