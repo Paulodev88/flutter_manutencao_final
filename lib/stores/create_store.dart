@@ -40,6 +40,23 @@ abstract class _CreateStore with Store {
   }
 
   @observable
+  String observacao = "";
+
+  @action
+  void setObservacao(String value) => observacao = value;
+
+  @computed
+  bool get observacaoIsValid => observacao.length >= 1;
+  String get observacaoError {
+    if (!showErrors || observacaoIsValid)
+      return null;
+    else if (nome.isEmpty)
+      return "Campo Obrigatório";
+    else
+      return "Insira um nome válido";
+  }
+
+  @observable
   Category category;
   @action
   void setCatgory(Category value) => category = value;
@@ -108,7 +125,7 @@ abstract class _CreateStore with Store {
   void setTensao(String value) => tensao = value;
 
   @computed
-  bool get tensaoIsValid => tensao.length >= 3;
+  bool get tensaoIsValid => tensao.length >= 0;
   String get tensaoError {
     if (!showErrors || tensaoIsValid)
       return null;
@@ -125,7 +142,7 @@ abstract class _CreateStore with Store {
   void setCorrente(String value) => corrente = value;
 
   @computed
-  bool get correnteIsValid => corrente.length >= 3;
+  bool get correnteIsValid => corrente.length >= 0;
   String get correnteError {
     if (!showErrors || correnteIsValid)
       return null;
@@ -142,7 +159,7 @@ abstract class _CreateStore with Store {
   void setPatrimonio(String value) => patrimonio = value;
 
   @computed
-  bool get patrimonioIsValid => patrimonio.length >= 3;
+  bool get patrimonioIsValid => patrimonio.length >= 0;
   String get patrimonioError {
     if (!showErrors || patrimonioIsValid)
       return null;
@@ -159,7 +176,7 @@ abstract class _CreateStore with Store {
   void setTag(String value) => tag = value;
 
   @computed
-  bool get tagIsValid => tag.length >= 3;
+  bool get tagIsValid => tag.length >= 0;
   String get tagError {
     if (!showErrors || tagIsValid)
       return null;
@@ -206,10 +223,12 @@ abstract class _CreateStore with Store {
     manutencao.unidade = unidade;
     manutencao.problema = problema;
     manutencao.solucao = solucao;
+    manutencao.observacao = observacao;
     manutencao.user = GetIt.I<UserMenagerStore>().user;
 
     loading = true;
     try {
+      // ignore: unused_local_variable
       final response = await ManutencaoRepository().save(manutencao);
     } catch (e) {
       error = e;

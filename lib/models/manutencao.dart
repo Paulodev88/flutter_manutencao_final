@@ -12,6 +12,7 @@ class Manutencao {
   String corrente;
   String patrimonio;
   String tag;
+  String observacao;
   Category category;
   Unidade unidade;
   String problema;

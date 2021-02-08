@@ -29,6 +29,8 @@ class ManutencaoRepository {
       manutencaoObject.set<String>(
           keyManutencaoPatrimonio, manutencao.patrimonio);
       manutencaoObject.set<String>(keyManutencaoTag, manutencao.tag);
+      manutencaoObject.set<String>(
+          keyManutencaoObservacao, manutencao.observacao);
       manutencaoObject.set<String>(keyManutencaoSolucao, manutencao.solucao);
       manutencaoObject.set<int>(keyManutencaoStatus, manutencao.status.index);
       manutencaoObject.set<String>(keyManutencaoProblema, manutencao.problema);

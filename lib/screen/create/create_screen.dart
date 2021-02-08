@@ -6,7 +6,8 @@ import 'package:manutencao_parse/componets/error_box.dart';
 import 'package:manutencao_parse/screen/create/components/category_field.dart';
 import 'package:manutencao_parse/screen/create/components/unidade_field.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
-
+// ignore: unused_import
+import 'package:mobx/mobx.dart';
 import 'components/images_field.dart';
 
 class CreateScreen extends StatelessWidget {
@@ -97,7 +98,8 @@ class CreateScreen extends StatelessWidget {
                                         labelText: "Tensão",
                                         labelStyle: labelStyle,
                                         contentPadding: contentPadding,
-                                        suffixText: "V"),
+                                        suffixText: "V",
+                                        errorText: createStore.tensaoError),
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
@@ -111,7 +113,8 @@ class CreateScreen extends StatelessWidget {
                                         labelText: "Corrente",
                                         labelStyle: labelStyle,
                                         contentPadding: contentPadding,
-                                        suffixText: "A"),
+                                        suffixText: "A",
+                                        errorText: createStore.correnteError),
                                     keyboardType: TextInputType.number,
                                   ),
                                 ),
@@ -123,21 +126,22 @@ class CreateScreen extends StatelessWidget {
                               return TextFormField(
                                 onChanged: createStore.setPatrimonio,
                                 decoration: InputDecoration(
-                                  labelText: "Patrimônio",
-                                  labelStyle: labelStyle,
-                                  contentPadding: contentPadding,
-                                ),
+                                    labelText: "Patrimônio",
+                                    labelStyle: labelStyle,
+                                    contentPadding: contentPadding,
+                                    errorText: createStore.patrimonioError),
                               );
                             },
                           ),
                           Observer(
                             builder: (_) {
                               return TextFormField(
+                                onChanged: createStore.setPatrimonio,
                                 decoration: InputDecoration(
-                                  labelText: "TAG",
-                                  labelStyle: labelStyle,
-                                  contentPadding: contentPadding,
-                                ),
+                                    labelText: "TAG",
+                                    labelStyle: labelStyle,
+                                    contentPadding: contentPadding,
+                                    errorText: createStore.tagError),
                               );
                             },
                           ),
@@ -167,6 +171,16 @@ class CreateScreen extends StatelessWidget {
                               );
                             },
                           ),
+                          Observer(builder: (_) {
+                            return TextFormField(
+                              onChanged: createStore.setObservacao,
+                              decoration: InputDecoration(
+                                  labelText: "Observação",
+                                  labelStyle: labelStyle,
+                                  contentPadding: contentPadding,
+                                  errorText: createStore.observacaoError),
+                            );
+                          }),
                           Observer(builder: (_) {
                             return ErrorBox(
                               message: createStore.error,

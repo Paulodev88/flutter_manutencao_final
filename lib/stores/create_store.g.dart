@@ -23,6 +23,13 @@ mixin _$CreateStore on _CreateStore, Store {
       (_$nameIsValidComputed ??= Computed<bool>(() => super.nameIsValid,
               name: '_CreateStore.nameIsValid'))
           .value;
+  Computed<bool> _$observacaoIsValidComputed;
+
+  @override
+  bool get observacaoIsValid => (_$observacaoIsValidComputed ??= Computed<bool>(
+          () => super.observacaoIsValid,
+          name: '_CreateStore.observacaoIsValid'))
+      .value;
   Computed<bool> _$categoryValidComputed;
 
   @override
@@ -105,6 +112,21 @@ mixin _$CreateStore on _CreateStore, Store {
   set nome(String value) {
     _$nomeAtom.reportWrite(value, super.nome, () {
       super.nome = value;
+    });
+  }
+
+  final _$observacaoAtom = Atom(name: '_CreateStore.observacao');
+
+  @override
+  String get observacao {
+    _$observacaoAtom.reportRead();
+    return super.observacao;
+  }
+
+  @override
+  set observacao(String value) {
+    _$observacaoAtom.reportWrite(value, super.observacao, () {
+      super.observacao = value;
     });
   }
 
@@ -243,6 +265,43 @@ mixin _$CreateStore on _CreateStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_CreateStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$errorAtom = Atom(name: '_CreateStore.error');
+
+  @override
+  String get error {
+    _$errorAtom.reportRead();
+    return super.error;
+  }
+
+  @override
+  set error(String value) {
+    _$errorAtom.reportWrite(value, super.error, () {
+      super.error = value;
+    });
+  }
+
+  final _$_sendAsyncAction = AsyncAction('_CreateStore._send');
+
+  @override
+  Future<void> _send() {
+    return _$_sendAsyncAction.run(() => super._send());
+  }
+
   final _$_CreateStoreActionController = ActionController(name: '_CreateStore');
 
   @override
@@ -251,6 +310,17 @@ mixin _$CreateStore on _CreateStore, Store {
         name: '_CreateStore.setTitle');
     try {
       return super.setTitle(value);
+    } finally {
+      _$_CreateStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setObservacao(String value) {
+    final _$actionInfo = _$_CreateStoreActionController.startAction(
+        name: '_CreateStore.setObservacao');
+    try {
+      return super.setObservacao(value);
     } finally {
       _$_CreateStoreActionController.endAction(_$actionInfo);
     }
@@ -359,6 +429,7 @@ mixin _$CreateStore on _CreateStore, Store {
   String toString() {
     return '''
 nome: ${nome},
+observacao: ${observacao},
 category: ${category},
 unidade: ${unidade},
 problema: ${problema},
@@ -368,8 +439,11 @@ corrente: ${corrente},
 patrimonio: ${patrimonio},
 tag: ${tag},
 showErrors: ${showErrors},
+loading: ${loading},
+error: ${error},
 imagesValid: ${imagesValid},
 nameIsValid: ${nameIsValid},
+observacaoIsValid: ${observacaoIsValid},
 categoryValid: ${categoryValid},
 unidadeValid: ${unidadeValid},
 problemaIsValid: ${problemaIsValid},

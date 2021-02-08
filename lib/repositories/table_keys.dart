@@ -28,3 +28,4 @@ const String keyManutencaoProblema = "problema";
 const String keyManutencaoSolucao = "solucao";
 const String keyManutencaoCreatedAt = "createdAt";
 const String keyManutencaoViews = "views";
+const String keyManutencaoObservacao = "obsevacao";
