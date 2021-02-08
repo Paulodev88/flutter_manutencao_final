@@ -36,7 +36,7 @@ class CategoryScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               elevation: 10,
-              margin: const EdgeInsets.fromLTRB(32, 12, 32, 200),
+              margin: const EdgeInsets.fromLTRB(32, 12, 32, 150),
               child: Observer(builder: (_) {
                 if (categoryStore.error != null) {
                   return ErrorBox(message: categoryStore.error);
