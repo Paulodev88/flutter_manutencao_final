@@ -209,6 +209,9 @@ abstract class _CreateStore with Store {
   @observable
   String error;
 
+  @observable
+  bool savedManutencao = false;
+
   @action
   Future<void> _send() async {
     final manutencao = Manutencao();
@@ -229,7 +232,8 @@ abstract class _CreateStore with Store {
     loading = true;
     try {
       // ignore: unused_local_variable
-      final response = await ManutencaoRepository().save(manutencao);
+      await ManutencaoRepository().save(manutencao);
+      savedManutencao = true;
     } catch (e) {
       error = e;
     }

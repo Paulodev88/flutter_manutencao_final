@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
 import 'package:manutencao_parse/componets/error_box.dart';
 import 'package:manutencao_parse/screen/create/components/category_field.dart';
 import 'package:manutencao_parse/screen/create/components/unidade_field.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
-// ignore: unused_import
+import 'package:manutencao_parse/stores/page_store.dart';
+
 import 'package:mobx/mobx.dart';
 import 'components/images_field.dart';
 
-class CreateScreen extends StatelessWidget {
+class CreateScreen extends StatefulWidget {
+  @override
+  _CreateScreenState createState() => _CreateScreenState();
+}
+
+class _CreateScreenState extends State<CreateScreen> {
   final CreateStore createStore = CreateStore();
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => createStore.savedManutencao, () {
+      GetIt.I<PageStore>().setPage(0);
+    });
+  }
 
   final labelStyle = TextStyle(
     fontWeight: FontWeight.w600,
@@ -67,8 +83,7 @@ class CreateScreen extends StatelessWidget {
                                 height: 16,
                               ),
                               CircularProgressIndicator(
-                                valueColor:
-                                    AlwaysStoppedAnimation(Colors.purple),
+                                valueColor: AlwaysStoppedAnimation(Colors.blue),
                               )
                             ],
                           ));

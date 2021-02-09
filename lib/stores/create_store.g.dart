@@ -295,6 +295,21 @@ mixin _$CreateStore on _CreateStore, Store {
     });
   }
 
+  final _$savedManutencaoAtom = Atom(name: '_CreateStore.savedManutencao');
+
+  @override
+  bool get savedManutencao {
+    _$savedManutencaoAtom.reportRead();
+    return super.savedManutencao;
+  }
+
+  @override
+  set savedManutencao(bool value) {
+    _$savedManutencaoAtom.reportWrite(value, super.savedManutencao, () {
+      super.savedManutencao = value;
+    });
+  }
+
   final _$_sendAsyncAction = AsyncAction('_CreateStore._send');
 
   @override
@@ -441,6 +456,7 @@ tag: ${tag},
 showErrors: ${showErrors},
 loading: ${loading},
 error: ${error},
+savedManutencao: ${savedManutencao},
 imagesValid: ${imagesValid},
 nameIsValid: ${nameIsValid},
 observacaoIsValid: ${observacaoIsValid},
