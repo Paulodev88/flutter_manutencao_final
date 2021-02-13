@@ -13,12 +13,52 @@ class ManutencaoRepository {
     String search,
     Category category,
     Unidade unidade,
-  }) {
+  }) async {
     final queryBuilder =
         QueryBuilder<ParseObject>(ParseObject(keyManutencaoTable));
 
+    queryBuilder.includeObject(
+        [keyManutencaoOwner, keyManutencaoCategory, keyManutencaoUnidade]);
+
+    queryBuilder.setLimit(20);
+
     queryBuilder.whereEqualTo(
         keyManutencaoStatus, ManutencaoStatus.CONCLUIDA.index);
+
+    if (search != null && search.trim().isNotEmpty) {
+      queryBuilder.whereContains(keyManutencaoNome, search,
+          caseSensitive: false);
+    }
+
+    if (category != null && category.id != '*') {
+      queryBuilder.whereEqualTo(
+          keyManutencaoCategory,
+          (ParseObject(KeyCategoryTable)..set(KeyCategoryId, category.id))
+              .toPointer());
+    }
+
+    if (category != null && category.id != '*') {
+      queryBuilder.whereEqualTo(
+          keyManutencaoCategory,
+          (ParseObject(KeyCategoryTable)..set(KeyCategoryId, category.id))
+              .toPointer());
+    }
+    if (unidade != null && unidade.id != '*') {
+      queryBuilder.whereEqualTo(
+          keyManutencaoUnidade,
+          (ParseObject(KeyUnidadeTable)..set(KeyUnidadeId, unidade.id))
+              .toPointer());
+    }
+
+    final response = await queryBuilder.query();
+
+    if (response.success && response.results != null) {
+      return response.results.map((po) => Manutencao.fromParse(po)).toList();
+    } else if (response.success && response.results == null) {
+      return [];
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error.code));
+    }
   }
 
   Future<void> save(Manutencao manutencao) async {
