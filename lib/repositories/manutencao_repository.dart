@@ -13,6 +13,7 @@ class ManutencaoRepository {
     String search,
     Category category,
     Unidade unidade,
+    int page,
   }) async {
     final queryBuilder =
         QueryBuilder<ParseObject>(ParseObject(keyManutencaoTable));
@@ -20,8 +21,9 @@ class ManutencaoRepository {
     queryBuilder.includeObject(
         [keyManutencaoOwner, keyManutencaoCategory, keyManutencaoUnidade]);
 
+    queryBuilder.setAmountToSkip(page * 20);
     queryBuilder.setLimit(20);
-
+    queryBuilder.orderByDescending(keyManutencaoCreatedAt);
     queryBuilder.whereEqualTo(
         keyManutencaoStatus, ManutencaoStatus.CONCLUIDA.index);
 

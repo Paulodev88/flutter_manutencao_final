@@ -17,9 +17,7 @@ class HomeScreen extends StatelessWidget {
             currentSearch: searchStore.search,
           );
         });
-    if (search != null) searchStore.seatSearch(search);
-
-    print(search);
+    if (search != null) searchStore.setSearch(search);
   }
 
   @override
@@ -66,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                   return IconButton(
                       icon: Icon(Icons.close),
                       onPressed: () {
-                        return searchStore.seatSearch("");
+                        return searchStore.setSearch("");
                       });
                 },
               )
@@ -106,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     }
-                    if (searchStore.loading)
+                    if (searchStore.showProgress)
                       return Center(
                         child: CircularProgressIndicator(
                           valueColor: AlwaysStoppedAnimation(Colors.white),
@@ -140,10 +138,19 @@ class HomeScreen extends StatelessWidget {
                         ),
                       );
                     return ListView.builder(
-                      itemCount: searchStore.manutencaoList.length,
+                      itemCount: searchStore.intemCount,
                       itemBuilder: (_, index) {
-                        return ManutencaoTile(
-                            searchStore.manutencaoList[index]);
+                        if (index < searchStore.manutencaoList.length)
+                          return ManutencaoTile(
+                              searchStore.manutencaoList[index]);
+                        searchStore.loadNextPage();
+                        return Container(
+                          height: 10,
+                          child: LinearProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation(Colors.blue[400]),
+                          ),
+                        );
                       },
                     );
                   },

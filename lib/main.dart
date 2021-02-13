@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:manutencao_parse/screen/base/base_Screen.dart';
 import 'package:manutencao_parse/stores/category_store.dart';
 import 'package:manutencao_parse/stores/search_store.dart';
@@ -35,6 +36,14 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.transparent,
         appBarTheme: AppBarTheme(elevation: 0, color: Colors.transparent),
       ),
+      supportedLocales: const [
+        Locale('pt', 'BR'),
+      ],
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
       home: BaseScreen(),
     );
   }

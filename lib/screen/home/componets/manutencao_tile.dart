@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:manutencao_parse/models/manutencao.dart';
+import 'package:manutencao_parse/helpers/extensions.dart';
 
 class ManutencaoTile extends StatelessWidget {
   ManutencaoTile(this.manutencao);
@@ -45,7 +46,7 @@ class ManutencaoTile extends StatelessWidget {
                     ),
                     Text(manutencao.unidade.unidade),
                     Text(manutencao.user.name),
-                    Text(manutencao.created.toString())
+                    Text(manutencao.created.formattedDate())
                   ],
                 ),
               ),
