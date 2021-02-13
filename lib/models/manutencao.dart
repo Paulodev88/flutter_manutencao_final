@@ -43,7 +43,7 @@ class Manutencao {
   Unidade unidade;
   String problema;
   String solucao;
-  ManutencaoStatus status = ManutencaoStatus.PENDENTE;
+  ManutencaoStatus status = ManutencaoStatus.CONCLUIDA;
   DateTime created;
   User user;
   int views;

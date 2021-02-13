@@ -1,12 +1,26 @@
 import 'dart:io';
 
+import 'package:manutencao_parse/models/category.dart';
 import 'package:manutencao_parse/models/manutencao.dart';
+import 'package:manutencao_parse/models/unidade.dart';
 import 'package:manutencao_parse/repositories/parse_errors.dart';
 import 'package:manutencao_parse/repositories/table_keys.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:path/path.dart' as path;
 
 class ManutencaoRepository {
+  Future<List<Manutencao>> getHomeManutencaoList({
+    String search,
+    Category category,
+    Unidade unidade,
+  }) {
+    final queryBuilder =
+        QueryBuilder<ParseObject>(ParseObject(keyManutencaoTable));
+
+    queryBuilder.whereEqualTo(
+        keyManutencaoStatus, ManutencaoStatus.CONCLUIDA.index);
+  }
+
   Future<void> save(Manutencao manutencao) async {
     try {
       final parseImages = await saveImages(manutencao.image);

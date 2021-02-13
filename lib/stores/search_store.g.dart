@@ -39,6 +39,21 @@ mixin _$SearchStore on _SearchStore, Store {
     });
   }
 
+  final _$unidadeAtom = Atom(name: '_SearchStore.unidade');
+
+  @override
+  Unidade get unidade {
+    _$unidadeAtom.reportRead();
+    return super.unidade;
+  }
+
+  @override
+  set unidade(Unidade value) {
+    _$unidadeAtom.reportWrite(value, super.unidade, () {
+      super.unidade = value;
+    });
+  }
+
   final _$_SearchStoreActionController = ActionController(name: '_SearchStore');
 
   @override
@@ -64,10 +79,22 @@ mixin _$SearchStore on _SearchStore, Store {
   }
 
   @override
+  void setUnidade(Unidade value) {
+    final _$actionInfo = _$_SearchStoreActionController.startAction(
+        name: '_SearchStore.setUnidade');
+    try {
+      return super.setUnidade(value);
+    } finally {
+      _$_SearchStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 search: ${search},
-category: ${category}
+category: ${category},
+unidade: ${unidade}
     ''';
   }
 }
