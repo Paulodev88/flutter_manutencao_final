@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manutencao_parse/screen/account/account_screen.dart';
 import 'package:manutencao_parse/screen/category/category_screen.dart';
 import 'package:manutencao_parse/screen/create/create_screen.dart';
 import 'package:manutencao_parse/screen/home/home_Screen.dart';
@@ -35,9 +36,7 @@ class _BaseScreenState extends State<BaseScreen> {
           CreateScreen(),
           Container(),
           CategoryScreen(),
-          Container(
-            color: Colors.green,
-          ),
+          AccountScreen(),
         ],
       ),
     );
