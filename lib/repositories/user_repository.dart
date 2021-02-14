@@ -10,6 +10,7 @@ class UserRepository {
     parseUser.set<String>(KeyUserName, user.name);
     parseUser.set<String>(KeyUserPhone, user.phone);
     parseUser.set(KeyUserType, user.type.index);
+    parseUser.set<String>(KeyUserEmail, user.email);
 
     final response = await parseUser.signUp();
 
@@ -53,6 +54,7 @@ class UserRepository {
       parseUser.set<String>(KeyUserName, user.name);
       parseUser.set<String>(KeyUserPhone, user.phone);
       parseUser.set<int>(KeyUserType, user.type.index);
+      parseUser.set<String>(KeyUserEmail, user.email);
 
       if (user.password != null) {
         parseUser.password = user.password;
