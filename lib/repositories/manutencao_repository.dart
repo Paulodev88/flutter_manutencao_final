@@ -6,6 +6,7 @@ import 'package:manutencao_parse/models/unidade.dart';
 import 'package:manutencao_parse/repositories/parse_errors.dart';
 import 'package:manutencao_parse/repositories/table_keys.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:manutencao_parse/models/user.dart';
 import 'package:path/path.dart' as path;
 
 class ManutencaoRepository {
@@ -136,6 +137,26 @@ class ManutencaoRepository {
       return parseImages;
     } catch (e) {
       return Future.error('Falha ao salvar imagens');
+    }
+  }
+
+  Future<List<Manutencao>> getMyMaintenance(User user) async {
+    final currentUser = ParseUser('', '', '')..set(KeyUserId, user.id);
+    final queryBuilder =
+        QueryBuilder<ParseObject>(ParseObject(keyManutencaoTable));
+
+    queryBuilder.setLimit(100);
+    queryBuilder.orderByDescending(keyManutencaoCreatedAt);
+    queryBuilder.whereEqualTo(keyManutencaoOwner, currentUser.toPointer());
+    queryBuilder.includeObject([keyManutencaoCategory, keyManutencaoOwner]);
+
+    final response = await queryBuilder.query();
+    if (response.success && response.results != null) {
+      return response.results.map((po) => Manutencao.fromParse(po)).toList();
+    } else if (response.success && response.results == null) {
+      return [];
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error.code));
     }
   }
 }
