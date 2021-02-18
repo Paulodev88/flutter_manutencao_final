@@ -11,6 +11,20 @@ part 'create_store.g.dart';
 class CreateStore = _CreateStore with _$CreateStore;
 
 abstract class _CreateStore with Store {
+  _CreateStore(Manutencao manutencao) {
+    nome = manutencao.nome;
+    images = manutencao.image.asObservable();
+    category = manutencao.category;
+    unidade = manutencao.unidade;
+    observacao = manutencao.observacao;
+    tensao = manutencao.tensao;
+    corrente = manutencao.corrente;
+    patrimonio = manutencao.patrimonio;
+    tag = manutencao.tag;
+    problema = manutencao.problema;
+    solucao = manutencao.solucao;
+  }
+
   ObservableList images = ObservableList();
 
   @computed

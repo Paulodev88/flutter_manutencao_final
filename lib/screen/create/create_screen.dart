@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
 import 'package:manutencao_parse/componets/error_box.dart';
+import 'package:manutencao_parse/models/manutencao.dart';
 import 'package:manutencao_parse/screen/create/components/category_field.dart';
 import 'package:manutencao_parse/screen/create/components/unidade_field.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
@@ -13,12 +14,19 @@ import 'package:mobx/mobx.dart';
 import 'components/images_field.dart';
 
 class CreateScreen extends StatefulWidget {
+  CreateScreen({this.manutencao});
+  final Manutencao manutencao;
   @override
-  _CreateScreenState createState() => _CreateScreenState();
+  _CreateScreenState createState() => _CreateScreenState(manutencao);
 }
 
 class _CreateScreenState extends State<CreateScreen> {
-  final CreateStore createStore = CreateStore();
+  _CreateScreenState(Manutencao manutencao)
+      : editing = manutencao != null,
+        createStore = CreateStore(manutencao ?? Manutencao());
+  final CreateStore createStore;
+
+  bool editing;
 
   @override
   void initState() {
@@ -53,12 +61,12 @@ class _CreateScreenState extends State<CreateScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Criar Manutenção",
+              editing ? "Editar Manutenção" : "Criar Manutenção",
               style: TextStyle(color: Colors.white),
             ),
             centerTitle: true,
           ),
-          drawer: CustomDrawer(),
+          drawer: editing ? null : CustomDrawer(),
           body: Container(
             alignment: Alignment.center,
             child: SingleChildScrollView(
@@ -95,6 +103,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           ImagesField(createStore),
                           Observer(builder: (_) {
                             return TextFormField(
+                              initialValue: createStore.nome,
                               onChanged: createStore.setTitle,
                               decoration: InputDecoration(
                                   labelText: "Nome do equipamento",
@@ -108,6 +117,7 @@ class _CreateScreenState extends State<CreateScreen> {
                               children: <Widget>[
                                 Expanded(
                                   child: TextFormField(
+                                    initialValue: createStore.tensao,
                                     onChanged: createStore.setTensao,
                                     decoration: InputDecoration(
                                         labelText: "Tensão",
@@ -123,6 +133,7 @@ class _CreateScreenState extends State<CreateScreen> {
                                 ),
                                 Expanded(
                                   child: TextFormField(
+                                    initialValue: createStore.corrente,
                                     onChanged: createStore.setCorrente,
                                     decoration: InputDecoration(
                                         labelText: "Corrente",
@@ -139,6 +150,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           Observer(
                             builder: (_) {
                               return TextFormField(
+                                initialValue: createStore.patrimonio,
                                 onChanged: createStore.setPatrimonio,
                                 decoration: InputDecoration(
                                     labelText: "Patrimônio",
@@ -151,6 +163,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           Observer(
                             builder: (_) {
                               return TextFormField(
+                                initialValue: createStore.patrimonio,
                                 onChanged: createStore.setPatrimonio,
                                 decoration: InputDecoration(
                                     labelText: "TAG",
@@ -164,6 +177,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           UnidadeField(createStore),
                           Observer(builder: (_) {
                             return TextFormField(
+                              initialValue: createStore.problema,
                               onChanged: createStore.setProblema,
                               maxLines: null,
                               decoration: InputDecoration(
@@ -176,6 +190,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           Observer(
                             builder: (_) {
                               return TextFormField(
+                                initialValue: createStore.solucao,
                                 onChanged: createStore.setSolucao,
                                 maxLines: null,
                                 decoration: InputDecoration(
@@ -188,6 +203,7 @@ class _CreateScreenState extends State<CreateScreen> {
                           ),
                           Observer(builder: (_) {
                             return TextFormField(
+                              initialValue: createStore.observacao,
                               onChanged: createStore.setObservacao,
                               decoration: InputDecoration(
                                   labelText: "Observação",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/helpers/search_name.dart';
 import 'package:manutencao_parse/screen/unidade/unidade_screen.dart';
 
 import 'package:manutencao_parse/stores/create_store.dart';
@@ -12,6 +13,7 @@ class UnidadeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SearchName name = SearchName();
     return Observer(
       builder: (_) {
         return Column(
@@ -37,7 +39,7 @@ class UnidadeField extends StatelessWidget {
               subtitle: createStore.unidade == null
                   ? null
                   : Text(
-                      "${createStore.unidade.unidade}",
+                      "${createStore.unidade.unidade == null ? name.unidadeName(createStore.unidade.id) : createStore.unidade.unidade}",
                       style: TextStyle(
                         fontWeight: FontWeight.w400,
                         color: Colors.black,

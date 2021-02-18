@@ -32,7 +32,7 @@ class Manutencao {
 
   Manutencao();
   String id;
-  List image;
+  List image = [];
   String nome;
   String tensao;
   String corrente;

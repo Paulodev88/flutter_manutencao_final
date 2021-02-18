@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:manutencao_parse/helpers/search_name.dart';
 import 'package:manutencao_parse/models/manutencao.dart';
+import 'package:manutencao_parse/screen/create/create_screen.dart';
 import 'package:manutencao_parse/screen/manutencao/manutecao_scree.dart';
 import 'package:manutencao_parse/stores/myMaintenance_store.dart';
 
@@ -69,7 +70,7 @@ class ActiveTile extends StatelessWidget {
                   onSelected: (choice) {
                     switch (choice.index) {
                       case 0:
-                        break;
+                        return editManutencao(context);
                       case 1:
                         break;
                     }
@@ -106,6 +107,11 @@ class ActiveTile extends StatelessWidget {
             ),
           )),
     );
+  }
+
+  Future<void> editManutencao(BuildContext context) async {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => CreateScreen(manutencao: manutencao)));
   }
 }
 
