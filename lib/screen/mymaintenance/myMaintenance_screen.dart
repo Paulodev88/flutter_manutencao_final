@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/screen/mymaintenance/componenets/active_tile.dart';
+import 'package:manutencao_parse/screen/mymaintenance/componenets/pending_tile.dart';
 import 'package:manutencao_parse/stores/myMaintenance_store.dart';
 
 class MyMaintenaceScreen extends StatefulWidget {
@@ -15,7 +18,7 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
   void initState() {
     super.initState();
 
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 2, vsync: this);
   }
 
   @override
@@ -39,17 +42,35 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
               controller: tabController,
               indicatorColor: Colors.white,
               tabs: [
+                Tab(child: Text("CONCLUÍDA")),
                 Tab(child: Text("PENDENTE")),
-                Tab(child: Text("CONCLUIDA")),
-                Tab(child: Text("DELETADA")),
               ]),
         ),
         body: TabBarView(
           controller: tabController,
           children: [
-            Container(color: Colors.white),
-            Container(color: Colors.blue),
-            Container(color: Colors.yellow),
+            Observer(builder: (_) {
+              if (maintenance.activeMaintenance.isEmpty) return Container();
+
+              return ListView.builder(
+                itemCount: maintenance.activeMaintenance.length,
+                itemBuilder: (_, index) {
+                  return ActiveTile(
+                      maintenance.activeMaintenance[index], maintenance);
+                },
+              );
+            }),
+            Observer(builder: (_) {
+              if (maintenance.pendenteMaintenance.isEmpty) return Container();
+
+              return ListView.builder(
+                itemCount: maintenance.pendenteMaintenance.length,
+                itemBuilder: (_, index) {
+                  return PendingTile(
+                      maintenance.pendenteMaintenance[index], maintenance);
+                },
+              );
+            }),
           ],
         ),
       ),

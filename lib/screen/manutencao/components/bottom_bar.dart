@@ -7,6 +7,7 @@ class BottomBar extends StatelessWidget {
   final Manutencao manutencao;
   @override
   Widget build(BuildContext context) {
+    if (manutencao.status == ManutencaoStatus.PENDENTE) return Container();
     return Positioned(
       bottom: 0,
       left: 0,

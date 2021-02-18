@@ -50,7 +50,9 @@ class ManutencaoScreen extends StatelessWidget {
                   ),
                   UserPanel(manutencao),
                   SizedBox(
-                    height: 120,
+                    height: manutencao.status == ManutencaoStatus.PENDENTE
+                        ? 16
+                        : 120,
                   )
                 ],
               ),

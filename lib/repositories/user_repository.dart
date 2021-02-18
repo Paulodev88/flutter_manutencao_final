@@ -10,7 +10,6 @@ class UserRepository {
     parseUser.set<String>(KeyUserName, user.name);
     parseUser.set<String>(KeyUserPhone, user.phone);
     parseUser.set(KeyUserType, user.type.index);
-    
 
     final response = await parseUser.signUp();
 
@@ -35,7 +34,7 @@ class UserRepository {
 
   Future<User> currentUser() async {
     final parseUser = await ParseUser.currentUser();
-    if (ParseUser != null) {
+    if (parseUser != null) {
       final response =
           await ParseUser.getCurrentUserFromServer(parseUser.sessionToken);
       if (response.success) {
@@ -54,7 +53,6 @@ class UserRepository {
       parseUser.set<String>(KeyUserName, user.name);
       parseUser.set<String>(KeyUserPhone, user.phone);
       parseUser.set<int>(KeyUserType, user.type.index);
-      
 
       if (user.password != null) {
         parseUser.password = user.password;
@@ -77,13 +75,19 @@ class UserRepository {
     }
   }
 
+  Future<void> logout() async {
+    final ParseUser currentUser = await ParseUser.currentUser();
+    await currentUser.logout();
+  }
+
   User mapParseToUser(ParseUser parseUser) {
     return User(
-        id: parseUser.objectId,
-        name: parseUser.get(KeyUserName),
-        email: parseUser.get(KeyUserEmail),
-        phone: parseUser.get(KeyUserPhone),
-        type: UserType.values[parseUser.get(KeyUserType)],
-        createdAt: parseUser.get(KeyUserCreatedAt));
+      id: parseUser.objectId,
+      name: parseUser.get(KeyUserName),
+      email: parseUser.get(KeyUserEmail),
+      phone: parseUser.get(KeyUserPhone),
+      type: UserType.values[parseUser.get(KeyUserType)],
+      createdAt: parseUser.get(KeyUserCreatedAt),
+    );
   }
 }

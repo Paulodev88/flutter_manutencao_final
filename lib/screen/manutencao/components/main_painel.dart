@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manutencao_parse/helpers/search_name.dart';
 import 'package:manutencao_parse/models/manutencao.dart';
 import 'package:manutencao_parse/helpers/extensions.dart';
 
@@ -8,6 +9,7 @@ class MainPainel extends StatelessWidget {
   final Manutencao manutencao;
   @override
   Widget build(BuildContext context) {
+    SearchName name = SearchName();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -28,7 +30,7 @@ class MainPainel extends StatelessWidget {
         ),
         Text("Unidade: ", style: TextStyle(fontSize: 20)),
         Text(
-          manutencao.unidade.unidade,
+          name.unidadeName(manutencao.unidade.id),
           style: TextStyle(
             fontSize: 18,
             letterSpacing: 1,
