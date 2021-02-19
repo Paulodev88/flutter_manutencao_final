@@ -31,9 +31,16 @@ abstract class _MyMaintenanceStore with Store {
     final user = GetIt.I<UserMenagerStore>().user;
 
     try {
+      loading = true;
       allMaintenance = await ManutencaoRepository().getMyMaintenance(user);
+      loading = false;
     } catch (e) {
       print(e);
     }
   }
+
+  @observable
+  bool loading = false;
+
+  void refresh() => _getMyMaintenance();
 }

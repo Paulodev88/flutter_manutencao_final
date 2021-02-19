@@ -32,10 +32,26 @@ mixin _$MyMaintenanceStore on _MyMaintenanceStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_MyMaintenanceStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 allMaintenance: ${allMaintenance},
+loading: ${loading},
 activeMaintenance: ${activeMaintenance}
     ''';
   }

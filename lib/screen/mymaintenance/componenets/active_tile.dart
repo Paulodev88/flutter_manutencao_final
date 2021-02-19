@@ -110,8 +110,10 @@ class ActiveTile extends StatelessWidget {
   }
 
   Future<void> editManutencao(BuildContext context) async {
-    Navigator.of(context).push(MaterialPageRoute(
+    final success = await Navigator.of(context).push(MaterialPageRoute(
         builder: (_) => CreateScreen(manutencao: manutencao)));
+
+    if (success != null && success) maintenance.refresh();
   }
 }
 

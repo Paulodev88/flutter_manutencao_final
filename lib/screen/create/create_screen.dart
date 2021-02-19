@@ -7,6 +7,7 @@ import 'package:manutencao_parse/componets/error_box.dart';
 import 'package:manutencao_parse/models/manutencao.dart';
 import 'package:manutencao_parse/screen/create/components/category_field.dart';
 import 'package:manutencao_parse/screen/create/components/unidade_field.dart';
+import 'package:manutencao_parse/screen/mymaintenance/myMaintenance_screen.dart';
 import 'package:manutencao_parse/stores/create_store.dart';
 import 'package:manutencao_parse/stores/page_store.dart';
 
@@ -33,7 +34,13 @@ class _CreateScreenState extends State<CreateScreen> {
     super.initState();
 
     when((_) => createStore.savedManutencao, () {
-      GetIt.I<PageStore>().setPage(0);
+      if (editing)
+        Navigator.of(context).pop(true);
+      else {
+        GetIt.I<PageStore>().setPage(0);
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => MyMaintenaceScreen(initialPage: 1)));
+      }
     });
   }
 

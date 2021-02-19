@@ -73,6 +73,8 @@ class ManutencaoRepository {
 
       final manutencaoObject = ParseObject(keyManutencaoTable);
 
+      if (manutencao.id != null) manutencaoObject.objectId = manutencao.id;
+
       final parseAcl = ParseACL(owner: parseUser);
 
       parseAcl.setPublicReadAccess(allowed: true);
