@@ -43,4 +43,11 @@ abstract class _MyMaintenanceStore with Store {
   bool loading = false;
 
   void refresh() => _getMyMaintenance();
+
+  @action
+  Future<void> deleteManutencao(Manutencao manutencao) async {
+    loading = true;
+    await ManutencaoRepository().delete(manutencao);
+    refresh();
+  }
 }

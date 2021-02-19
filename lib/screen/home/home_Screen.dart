@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
+import 'package:manutencao_parse/componets/empty_card.dart';
 import 'package:manutencao_parse/screen/home/componets/create_manutencao_button.dart';
 import 'package:manutencao_parse/screen/home/componets/manutencao_tile.dart';
 import 'package:manutencao_parse/screen/home/componets/search_dialog.dart';
@@ -123,31 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
 
                         if (searchStore.manutencaoList.isEmpty)
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  Icons.border_clear,
-                                  color: Colors.white,
-                                  size: 100,
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  'Humm... Nenhuma manutenção encontrada!',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
+                          return EmptyCard("Nenhuma manutenção encontrada :(");
                         return ListView.builder(
                           controller: scrollController,
                           itemCount: searchStore.intemCount,

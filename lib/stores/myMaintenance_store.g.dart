@@ -47,6 +47,15 @@ mixin _$MyMaintenanceStore on _MyMaintenanceStore, Store {
     });
   }
 
+  final _$deleteManutencaoAsyncAction =
+      AsyncAction('_MyMaintenanceStore.deleteManutencao');
+
+  @override
+  Future<void> deleteManutencao(Manutencao manutencao) {
+    return _$deleteManutencaoAsyncAction
+        .run(() => super.deleteManutencao(manutencao));
+  }
+
   @override
   String toString() {
     return '''

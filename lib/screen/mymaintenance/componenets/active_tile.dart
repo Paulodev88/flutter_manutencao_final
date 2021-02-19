@@ -70,8 +70,11 @@ class ActiveTile extends StatelessWidget {
                   onSelected: (choice) {
                     switch (choice.index) {
                       case 0:
-                        return editManutencao(context);
+                        editManutencao(context);
+                        break;
+
                       case 1:
+                        deleteManutencao(context);
                         break;
                     }
                   },
@@ -114,6 +117,31 @@ class ActiveTile extends StatelessWidget {
         builder: (_) => CreateScreen(manutencao: manutencao)));
 
     if (success != null && success) maintenance.refresh();
+  }
+
+  void deleteManutencao(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: Text('Excluir'),
+        content: Text('Confirmar a exclusão de ${manutencao.nome}?'),
+        actions: [
+          FlatButton(
+            onPressed: Navigator.of(context).pop,
+            child: Text('Não'),
+            textColor: Colors.blue,
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              maintenance.deleteManutencao(manutencao);
+            },
+            child: Text('Sim'),
+            textColor: Colors.red,
+          ),
+        ],
+      ),
+    );
   }
 }
 

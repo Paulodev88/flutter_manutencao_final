@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
+import 'package:manutencao_parse/screen/edit_account/edit_account_screen.dart';
 import 'package:manutencao_parse/screen/mymaintenance/myMaintenance_screen.dart';
 import 'package:manutencao_parse/stores/user_menager_store.dart';
 
@@ -68,7 +69,10 @@ class AccountScreen extends StatelessWidget {
                         child: FlatButton(
                           child: Text("EDITAR"),
                           textColor: Colors.blue,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => EditAccountScreen()));
+                          },
                         ),
                       ),
                     ],

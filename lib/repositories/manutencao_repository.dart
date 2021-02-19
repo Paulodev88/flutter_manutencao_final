@@ -161,4 +161,15 @@ class ManutencaoRepository {
       return Future.error(ParseErrors.getDescription(response.error.code));
     }
   }
+
+  Future<void> delete(Manutencao manutencao) async {
+    final parseObject = ParseObject(keyManutencaoTable)
+      ..set(keyManutencaoId, manutencao.id);
+
+    parseObject.set(keyManutencaoStatus, ManutencaoStatus.DELETADA.index);
+
+    final response = await parseObject.save();
+    if (!response.success)
+      return Future.error(ParseErrors.getDescription(response.error.code));
+  }
 }

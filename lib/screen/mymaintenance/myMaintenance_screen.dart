@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/componets/empty_card.dart';
 import 'package:manutencao_parse/screen/mymaintenance/componenets/active_tile.dart';
 import 'package:manutencao_parse/screen/mymaintenance/componenets/pending_tile.dart';
 import 'package:manutencao_parse/stores/myMaintenance_store.dart';
@@ -60,7 +61,9 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
             controller: tabController,
             children: [
               Observer(builder: (_) {
-                if (maintenance.activeMaintenance.isEmpty) return Container();
+                if (maintenance.activeMaintenance.isEmpty)
+                  return EmptyCard(
+                      "Você não possui nenhuma manutenção, vamos trabalhar!");
 
                 return ListView.builder(
                   itemCount: maintenance.activeMaintenance.length,
@@ -71,7 +74,9 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
                 );
               }),
               Observer(builder: (_) {
-                if (maintenance.pendenteMaintenance.isEmpty) return Container();
+                if (maintenance.pendenteMaintenance.isEmpty)
+                  return EmptyCard(
+                      "Você não possui nenhuma manutenção pendente!");
 
                 return ListView.builder(
                   itemCount: maintenance.pendenteMaintenance.length,
