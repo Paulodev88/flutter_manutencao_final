@@ -29,3 +29,8 @@ const String keyManutencaoSolucao = "solucao";
 const String keyManutencaoCreatedAt = "createdAt";
 const String keyManutencaoViews = "views";
 const String keyManutencaoObservacao = "obsevacao";
+
+const String keyFavoriteTable = "Favorites";
+const String keyFavoriteId = "objectId";
+const String keyFavoriteManutencao = "manutencao";
+const String keyFavoriteOwner = "owner";

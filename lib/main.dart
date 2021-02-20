@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:manutencao_parse/screen/base/base_Screen.dart';
 import 'package:manutencao_parse/stores/category_store.dart';
+import 'package:manutencao_parse/stores/favorite_store.dart';
 import 'package:manutencao_parse/stores/search_store.dart';
 import 'package:manutencao_parse/stores/unidade_store.dart';
 import 'package:manutencao_parse/stores/user_menager_store.dart';
@@ -22,6 +23,7 @@ void setupLocators() {
   GetIt.I.registerSingleton(UserMenagerStore());
   GetIt.I.registerSingleton(CategoryStore());
   GetIt.I.registerSingleton(UnidadeStore());
+  GetIt.I.registerSingleton(FavoriteStore());
 }
 
 class MyApp extends StatelessWidget {
