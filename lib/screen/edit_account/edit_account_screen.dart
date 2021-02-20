@@ -2,9 +2,12 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:manutencao_parse/stores/edit_account_store.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class EditAccountScreen extends StatelessWidget {
+  final EditAccountStore store = EditAccountStore();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -43,30 +46,38 @@ class EditAccountScreen extends StatelessWidget {
                         cornerRadius: 16,
                         inactiveBgColor: Colors.blue[200],
                         inactiveFgColor: Colors.white,
-                        onToggle: (i) {},
+                        onToggle: store.setUserType,
+                      );
+                    }),
+                    const SizedBox(height: 8),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                          onChanged: store.setName,
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              isDense: true,
+                              labelText: "Nome:",
+                              errorText: store.nameError));
+                    }),
+                    const SizedBox(height: 8),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                        onChanged: store.setPhone,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                            labelText: "Telefone:",
+                            errorText: store.phoneError),
+                        inputFormatters: [
+                          FilteringTextInputFormatter.digitsOnly,
+                          TelefoneInputFormatter(),
+                        ],
+                        keyboardType: TextInputType.phone,
                       );
                     }),
                     const SizedBox(height: 8),
                     TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          labelText: "Nome:"),
-                    ),
-                    const SizedBox(height: 8),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          labelText: "Telefone:"),
-                      inputFormatters: [
-                        FilteringTextInputFormatter.digitsOnly,
-                        TelefoneInputFormatter(),
-                      ],
-                      keyboardType: TextInputType.phone,
-                    ),
-                    const SizedBox(height: 8),
-                    TextFormField(
+                      onChanged: store.setPass1,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           isDense: true,
@@ -74,28 +85,34 @@ class EditAccountScreen extends StatelessWidget {
                       obscureText: true,
                     ),
                     const SizedBox(height: 8),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          labelText: "Confirmar Senha:"),
-                      obscureText: true,
-                    ),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                        onChanged: store.setPass2,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                            labelText: "Confirmar Senha:",
+                            errorText: store.passError),
+                        obscureText: true,
+                      );
+                    }),
                     const SizedBox(height: 15),
-                    SizedBox(
-                      height: 40,
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        onPressed: () {},
-                        color: Colors.blue,
-                        elevation: 8,
-                        child: Text(
-                          "Salvar",
-                          style: TextStyle(color: Colors.white),
+                    Observer(builder: (_) {
+                      return SizedBox(
+                        height: 40,
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16)),
+                          onPressed: store.isFormValid ? () {} : null,
+                          color: Colors.blue,
+                          elevation: 8,
+                          child: Text(
+                            "Salvar",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 40,
@@ -103,7 +120,7 @@ class EditAccountScreen extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16)),
                         onPressed: () {},
-                        color: Colors.grey,
+                        color: Colors.blue[200],
                         elevation: 8,
                         child: Text(
                           "Sair",
