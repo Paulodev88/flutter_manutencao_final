@@ -1,13 +1,15 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:manutencao_parse/stores/edit_account_store.dart';
+import 'package:get_it/get_it.dart';
+import 'package:manutencao_parse/stores/page_store.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:manutencao_parse/stores/edit_account_store.dart';
 
 class EditAccountScreen extends StatelessWidget {
   final EditAccountStore store = EditAccountStore();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,15 +25,16 @@ class EditAccountScreen extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
+          title: Text('Editar Conta'),
           centerTitle: true,
-          title: Text("Editar Conta"),
         ),
         body: Center(
           child: SingleChildScrollView(
             child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
               margin: const EdgeInsets.symmetric(horizontal: 32),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
               elevation: 8,
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -39,77 +42,105 @@ class EditAccountScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    LayoutBuilder(builder: (_, constraints) {
-                      return ToggleSwitch(
-                        minWidth: constraints.biggest.width / 2.01,
-                        labels: ["Técnico", "Administrativo"],
-                        cornerRadius: 16,
-                        inactiveBgColor: Colors.blue[200],
-                        inactiveFgColor: Colors.white,
-                        onToggle: store.setUserType,
+                    Observer(builder: (_) {
+                      return IgnorePointer(
+                        ignoring: store.loading,
+                        child: LayoutBuilder(
+                          builder: (_, constraints) {
+                            return ToggleSwitch(
+                              minWidth: constraints.biggest.width / 2.01,
+                              labels: ['Técnico', 'Administrativo'],
+                              cornerRadius: 20,
+                              activeBgColor: Colors.blue,
+                              inactiveBgColor: Colors.grey,
+                              activeFgColor: Colors.white,
+                              inactiveFgColor: Colors.white,
+                              initialLabelIndex: store.userType.index,
+                              onToggle: store.setUserType,
+                            );
+                          },
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 12),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                        initialValue: store.name,
+                        enabled: !store.loading,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Nome*',
+                          errorText: store.nameError,
+                        ),
+                        onChanged: store.setName,
                       );
                     }),
                     const SizedBox(height: 8),
                     Observer(builder: (_) {
                       return TextFormField(
-                          onChanged: store.setName,
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              isDense: true,
-                              labelText: "Nome:",
-                              errorText: store.nameError));
-                    }),
-                    const SizedBox(height: 8),
-                    Observer(builder: (_) {
-                      return TextFormField(
-                        onChanged: store.setPhone,
+                        initialValue: store.phone,
+                        enabled: !store.loading,
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            labelText: "Telefone:",
-                            errorText: store.phoneError),
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Telefone*',
+                          errorText: store.phoneError,
+                        ),
+                        keyboardType: TextInputType.number,
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                           TelefoneInputFormatter(),
                         ],
-                        keyboardType: TextInputType.phone,
+                        onChanged: store.setPhone,
                       );
                     }),
-                    const SizedBox(height: 8),
-                    TextFormField(
-                      onChanged: store.setPass1,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          labelText: "Nova Senha:"),
-                      obscureText: true,
-                    ),
                     const SizedBox(height: 8),
                     Observer(builder: (_) {
                       return TextFormField(
-                        onChanged: store.setPass2,
+                        enabled: !store.loading,
                         decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            isDense: true,
-                            labelText: "Confirmar Senha:",
-                            errorText: store.passError),
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Nova Senha',
+                        ),
                         obscureText: true,
+                        onChanged: store.setPass1,
                       );
                     }),
-                    const SizedBox(height: 15),
+                    const SizedBox(height: 8),
+                    Observer(builder: (_) {
+                      return TextFormField(
+                        enabled: !store.loading,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          labelText: 'Confirmar Nova Senha',
+                          errorText: store.passError,
+                        ),
+                        obscureText: true,
+                        onChanged: store.setPass2,
+                      );
+                    }),
+                    const SizedBox(height: 12),
                     Observer(builder: (_) {
                       return SizedBox(
                         height: 40,
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16)),
-                          onPressed: store.isFormValid ? () {} : null,
-                          color: Colors.blue,
-                          elevation: 8,
-                          child: Text(
-                            "Salvar",
-                            style: TextStyle(color: Colors.white),
+                            borderRadius: BorderRadius.circular(20),
                           ),
+                          color: Colors.blue,
+                          disabledColor: Colors.blue.withAlpha(100),
+                          elevation: 0,
+                          textColor: Colors.white,
+                          child: store.loading
+                              ? CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.white),
+                                )
+                              : Text('Salvar'),
+                          onPressed: store.savePressed,
                         ),
                       );
                     }),
@@ -118,16 +149,19 @@ class EditAccountScreen extends StatelessWidget {
                       height: 40,
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        onPressed: () {},
-                        color: Colors.blue[200],
-                        elevation: 8,
-                        child: Text(
-                          "Sair",
-                          style: TextStyle(color: Colors.white),
+                          borderRadius: BorderRadius.circular(20),
                         ),
+                        color: Colors.blue[200],
+                        elevation: 0,
+                        textColor: Colors.white,
+                        child: Text('Sair'),
+                        onPressed: () {
+                          store.logout();
+                          GetIt.I<PageStore>().setPage(0);
+                          Navigator.of(context).pop();
+                        },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

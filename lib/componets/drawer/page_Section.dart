@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:manutencao_parse/componets/drawer/page_Tile.dart';
 import 'package:get_it/get_it.dart';
+import 'package:manutencao_parse/screen/login/login_Screen.dart';
 import 'package:manutencao_parse/stores/page_store.dart';
+import 'package:manutencao_parse/stores/user_menager_store.dart';
 
 class PageSection extends StatelessWidget {
   final PageStore pageStore = GetIt.I<PageStore>();
+  final UserMenagerStore userMenagerStore = GetIt.I<UserMenagerStore>();
 
   @override
   Widget build(BuildContext context) {
+    Future<void> verifyLoginAndSetPage(int page) async {
+      if (userMenagerStore.isLoggedIn) {
+        pageStore.setPage(page);
+      } else {
+        final result = await Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => LoginScreen()));
+        if (result != null && result) pageStore.setPage(page);
+      }
+    }
+
     return Column(
       children: [
         SizedBox(
@@ -33,7 +46,7 @@ class PageSection extends StatelessWidget {
           label: "Inserir Manutenção",
           iconData: Icons.edit,
           onTap: () {
-            pageStore.setPage(1);
+            verifyLoginAndSetPage(1);
           },
           highlighted: pageStore.page == 1,
         ),
@@ -41,14 +54,14 @@ class PageSection extends StatelessWidget {
             label: "Observações",
             iconData: Icons.chat_outlined,
             onTap: () {
-              pageStore.setPage(2);
+              verifyLoginAndSetPage(2);
             },
             highlighted: pageStore.page == 2),
         PageTile(
           label: "Favoritos",
           iconData: Icons.star,
           onTap: () {
-            pageStore.setPage(3);
+            verifyLoginAndSetPage(3);
           },
           highlighted: pageStore.page == 3,
         ),
@@ -56,7 +69,7 @@ class PageSection extends StatelessWidget {
           label: "Minha Conta",
           iconData: Icons.person_pin,
           onTap: () {
-            pageStore.setPage(4);
+            verifyLoginAndSetPage(4);
           },
           highlighted: pageStore.page == 4,
         ),

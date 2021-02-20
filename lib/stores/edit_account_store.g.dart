@@ -37,6 +37,13 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
       (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
               name: '_EditAccountStore.isFormValid'))
           .value;
+  Computed<VoidCallback> _$savePressedComputed;
+
+  @override
+  VoidCallback get savePressed =>
+      (_$savePressedComputed ??= Computed<VoidCallback>(() => super.savePressed,
+              name: '_EditAccountStore.savePressed'))
+          .value;
 
   final _$userTypeAtom = Atom(name: '_EditAccountStore.userType');
 
@@ -113,6 +120,28 @@ mixin _$EditAccountStore on _EditAccountStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_EditAccountStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$_saveAsyncAction = AsyncAction('_EditAccountStore._save');
+
+  @override
+  Future<void> _save() {
+    return _$_saveAsyncAction.run(() => super._save());
+  }
+
   final _$_EditAccountStoreActionController =
       ActionController(name: '_EditAccountStore');
 
@@ -179,10 +208,12 @@ name: ${name},
 phone: ${phone},
 pass1: ${pass1},
 pass2: ${pass2},
+loading: ${loading},
 nameValid: ${nameValid},
 phoneValid: ${phoneValid},
 passValid: ${passValid},
-isFormValid: ${isFormValid}
+isFormValid: ${isFormValid},
+savePressed: ${savePressed}
     ''';
   }
 }
