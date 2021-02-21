@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/drawer/custom_Drawer.dart';
 import 'package:manutencao_parse/screen/edit_account/edit_account_screen.dart';
+import 'package:manutencao_parse/screen/favorites/favorites_screen.dart';
 import 'package:manutencao_parse/screen/mymaintenance/myMaintenance_screen.dart';
 import 'package:manutencao_parse/stores/user_menager_store.dart';
 
@@ -98,7 +99,10 @@ class AccountScreen extends StatelessWidget {
                         color: Colors.blue, fontWeight: FontWeight.w600),
                   ),
                   trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => FavoritesScreen(hideDrawer: true)));
+                  },
                 ),
               ],
             ),

@@ -21,9 +21,9 @@ void setupLocators() {
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(SearchStore());
   GetIt.I.registerSingleton(UserMenagerStore());
+  GetIt.I.registerSingleton(FavoriteStore());
   GetIt.I.registerSingleton(CategoryStore());
   GetIt.I.registerSingleton(UnidadeStore());
-  GetIt.I.registerSingleton(FavoriteStore());
 }
 
 class MyApp extends StatelessWidget {

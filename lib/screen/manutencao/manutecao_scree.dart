@@ -32,7 +32,7 @@ class ManutencaoScreen extends StatelessWidget {
             Observer(builder: (_) {
               return IconButton(
                   icon: Icon(favoriteStore.favoriteList
-                          .any((a) => a.id == manutencao.id)
+                          .any((m) => m.id == manutencao.id)
                       ? Icons.favorite
                       : Icons.favorite_border),
                   onPressed: () => favoriteStore.toggleFavorite(manutencao));
