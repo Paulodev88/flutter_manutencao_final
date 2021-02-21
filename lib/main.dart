@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:manutencao_parse/screen/base/base_Screen.dart';
 import 'package:manutencao_parse/stores/category_store.dart';
+import 'package:manutencao_parse/stores/connectivity_store.dart';
 import 'package:manutencao_parse/stores/favorite_store.dart';
 import 'package:manutencao_parse/stores/search_store.dart';
 import 'package:manutencao_parse/stores/unidade_store.dart';
@@ -18,6 +19,7 @@ void main() async {
 }
 
 void setupLocators() {
+  GetIt.I.registerSingleton(ConnectivityStore());
   GetIt.I.registerSingleton(PageStore());
   GetIt.I.registerSingleton(SearchStore());
   GetIt.I.registerSingleton(UserMenagerStore());

@@ -10,12 +10,12 @@ class FavoriteStore = _FavoriteStore with _$FavoriteStore;
 
 abstract class _FavoriteStore with Store {
   _FavoriteStore() {
-    reaction((_) => userManagerStore.isLoggedIn, (_) {
+    reaction((_) => userMenagerStore.isLoggedIn, (_) {
       _getFavoriteList();
     });
   }
 
-  final UserMenagerStore userManagerStore = GetIt.I<UserMenagerStore>();
+  final UserMenagerStore userMenagerStore = GetIt.I<UserMenagerStore>();
 
   ObservableList<Manutencao> favoriteList = ObservableList<Manutencao>();
 
@@ -24,7 +24,7 @@ abstract class _FavoriteStore with Store {
     try {
       favoriteList.clear();
       final favorites =
-          await FavoriteRepository().getFavorites(userManagerStore.user);
+          await FavoriteRepository().getFavorites(userMenagerStore.user);
       favoriteList.addAll(favorites);
     } catch (e) {
       print(e);
@@ -37,11 +37,11 @@ abstract class _FavoriteStore with Store {
       if (favoriteList.any((a) => a.id == manutencao.id)) {
         favoriteList.removeWhere((a) => a.id == manutencao.id);
         await FavoriteRepository()
-            .delete(manutencao: manutencao, user: userManagerStore.user);
+            .delete(manutencao: manutencao, user: userMenagerStore.user);
       } else {
         favoriteList.add(manutencao);
         await FavoriteRepository()
-            .save(manutencao: manutencao, user: userManagerStore.user);
+            .save(manutencao: manutencao, user: userMenagerStore.user);
       }
     } catch (e) {
       print(e);

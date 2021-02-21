@@ -31,11 +31,13 @@ class ManutencaoScreen extends StatelessWidget {
               userMenagerStore.isLoggedIn)
             Observer(builder: (_) {
               return IconButton(
-                  icon: Icon(favoriteStore.favoriteList
-                          .any((m) => m.id == manutencao.id)
+                icon: Icon(
+                  favoriteStore.favoriteList.any((a) => a.id == manutencao.id)
                       ? Icons.favorite
-                      : Icons.favorite_border),
-                  onPressed: () => favoriteStore.toggleFavorite(manutencao));
+                      : Icons.favorite_border,
+                ),
+                onPressed: () => favoriteStore.toggleFavorite(manutencao),
+              );
             })
         ],
       ),
