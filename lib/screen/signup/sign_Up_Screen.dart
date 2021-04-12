@@ -2,12 +2,31 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
 import 'package:manutencao_parse/componets/error_box.dart';
 import 'package:manutencao_parse/screen/signup/components/field_title.dart';
 import 'package:manutencao_parse/stores/signup_store.dart';
+import 'package:manutencao_parse/stores/user_menager_store.dart';
+import 'package:mobx/mobx.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
+  @override
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
   final SignupStore signupStore = SignupStore();
+  final UserMenagerStore userMenagerStore = GetIt.I<UserMenagerStore>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => userMenagerStore.user != null, () {
+      Navigator.of(context).pop(true);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
