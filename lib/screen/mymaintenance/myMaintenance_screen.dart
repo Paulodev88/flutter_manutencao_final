@@ -47,7 +47,7 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
               indicatorColor: Colors.white,
               tabs: [
                 Tab(child: Text("CONCLUÍDA")),
-                Tab(child: Text("PENDENTE")),
+                Tab(child: Text("EXCLUÍDA")),
               ]),
         ),
         body: Observer(builder: (_) {
@@ -76,7 +76,7 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
               Observer(builder: (_) {
                 if (maintenance.pendenteMaintenance.isEmpty)
                   return EmptyCard(
-                      "Você não possui nenhuma manutenção pendente!");
+                      "Você não possui nenhuma manutenção excluída!");
 
                 return ListView.builder(
                   itemCount: maintenance.pendenteMaintenance.length,
