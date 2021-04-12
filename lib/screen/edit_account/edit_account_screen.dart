@@ -126,6 +126,7 @@ class EditAccountScreen extends StatelessWidget {
                     Observer(builder: (_) {
                       return SizedBox(
                         height: 40,
+                        // ignore: deprecated_member_use
                         child: RaisedButton(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
@@ -147,6 +148,7 @@ class EditAccountScreen extends StatelessWidget {
                     const SizedBox(height: 8),
                     SizedBox(
                       height: 40,
+                      // ignore: deprecated_member_use
                       child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),

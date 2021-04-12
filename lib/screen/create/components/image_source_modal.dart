@@ -18,10 +18,12 @@ class ImageSourceModal extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: getFromCamera,
               child: const Text("Câmera"),
             ),
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: getFromGallery,
               child: const Text("Galeria"),

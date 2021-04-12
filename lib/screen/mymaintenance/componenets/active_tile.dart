@@ -126,11 +126,13 @@ class ActiveTile extends StatelessWidget {
         title: Text('Excluir'),
         content: Text('Confirmar a exclusão de ${manutencao.nome}?'),
         actions: [
+          // ignore: deprecated_member_use
           FlatButton(
             onPressed: Navigator.of(context).pop,
             child: Text('Não'),
             textColor: Colors.blue,
           ),
+          // ignore: deprecated_member_use
           FlatButton(
             onPressed: () {
               Navigator.of(context).pop();

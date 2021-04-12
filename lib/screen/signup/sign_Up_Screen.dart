@@ -138,6 +138,7 @@ class SignUpScreen extends StatelessWidget {
                               height: 40,
                               margin:
                                   const EdgeInsets.only(top: 20, bottom: 20),
+                              // ignore: deprecated_member_use
                               child: RaisedButton(
                                 color: Colors.purple,
                                 disabledColor: Colors.purple[100],

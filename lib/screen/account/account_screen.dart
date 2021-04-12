@@ -67,6 +67,7 @@ class AccountScreen extends StatelessWidget {
                       ),
                       Align(
                         alignment: Alignment.topRight,
+                        // ignore: deprecated_member_use
                         child: FlatButton(
                           child: Text("EDITAR"),
                           textColor: Colors.blue,

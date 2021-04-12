@@ -45,6 +45,7 @@ class _CreateManutencaoButtonState extends State<CreateManutencaoButton>
           child: Container(
             height: 50,
             margin: EdgeInsets.only(bottom: buttonAnimation.value),
+            // ignore: deprecated_member_use
             child: RaisedButton(
               color: Colors.blue,
               elevation: 0,
