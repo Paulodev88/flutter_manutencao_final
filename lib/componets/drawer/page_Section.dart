@@ -29,10 +29,13 @@ class PageSection extends StatelessWidget {
         Text(
           "Manutenções \nda SCI",
           style: TextStyle(
-              fontSize: 25.0,
+              fontSize: 30.0,
               fontWeight: FontWeight.bold,
               color: Colors.purple[900]),
           textAlign: TextAlign.center,
+        ),
+        SizedBox(
+          height: 30,
         ),
         PageTile(
           label: "Manutenções",

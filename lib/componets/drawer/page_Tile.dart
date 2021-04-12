@@ -15,7 +15,8 @@ class PageTile extends StatelessWidget {
         label,
         style: TextStyle(
             color: highlighted ? Colors.blue[700] : Colors.black54,
-            fontWeight: FontWeight.w800),
+            fontWeight: FontWeight.w800,
+            fontSize: 16),
       ),
       leading: Icon(
         iconData,

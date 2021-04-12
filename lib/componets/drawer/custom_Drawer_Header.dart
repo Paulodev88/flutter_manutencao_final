@@ -21,7 +21,7 @@ class CustomDrawerHeader extends StatelessWidget {
         }
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         height: 100,
         color: Colors.transparent,
         child: Row(
@@ -32,11 +32,11 @@ class CustomDrawerHeader extends StatelessWidget {
               size: 35,
             ),
             const SizedBox(
-              width: 20,
+              width: 10,
             ),
             Expanded(
                 child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -45,7 +45,7 @@ class CustomDrawerHeader extends StatelessWidget {
                       : "Acesse sua conta!",
                   style: TextStyle(
                       color: Colors.purple[900],
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
@@ -54,7 +54,7 @@ class CustomDrawerHeader extends StatelessWidget {
                         : "Clique aqui.",
                     style: TextStyle(
                         color: Colors.purple[900],
-                        fontSize: 14,
+                        fontSize: 16,
                         fontWeight: FontWeight.w400)),
               ],
             ))
