@@ -212,6 +212,7 @@ class _CreateScreenState extends State<CreateScreen> {
                             return TextFormField(
                               initialValue: createStore.observacao,
                               onChanged: createStore.setObservacao,
+                              maxLines: null,
                               decoration: InputDecoration(
                                   labelText: "Observação",
                                   labelStyle: labelStyle,

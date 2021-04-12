@@ -30,7 +30,9 @@ class SearchName {
       return "Creche SR";
     else if (id == "odGnxm3B0S")
       return "Ginásio SR";
-    else if (id == "Yw7hIKWmtS") return "ndústria SR";
+    else if (id == "Yw7hIKWmtS")
+      return "Indústria SR";
+    else if (id == "w5gGjZRLkK") return "Roberto Simonsen";
 
     return "Unidade não encontrada ;(";
   }
