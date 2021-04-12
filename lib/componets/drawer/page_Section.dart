@@ -51,27 +51,20 @@ class PageSection extends StatelessWidget {
           highlighted: pageStore.page == 1,
         ),
         PageTile(
-            label: "Observações",
-            iconData: Icons.chat_outlined,
-            onTap: () {
-              verifyLoginAndSetPage(2);
-            },
-            highlighted: pageStore.page == 2),
-        PageTile(
           label: "Favoritos",
           iconData: Icons.star,
           onTap: () {
-            verifyLoginAndSetPage(3);
+            verifyLoginAndSetPage(2);
           },
-          highlighted: pageStore.page == 3,
+          highlighted: pageStore.page == 2,
         ),
         PageTile(
           label: "Minha Conta",
           iconData: Icons.person_pin,
           onTap: () {
-            verifyLoginAndSetPage(4);
+            verifyLoginAndSetPage(3);
           },
-          highlighted: pageStore.page == 4,
+          highlighted: pageStore.page == 3,
         ),
       ],
     );

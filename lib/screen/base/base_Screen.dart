@@ -43,7 +43,6 @@ class _BaseScreenState extends State<BaseScreen> {
         children: <Widget>[
           HomeScreen(),
           CreateScreen(),
-          Container(),
           FavoritesScreen(),
           AccountScreen(),
         ],
