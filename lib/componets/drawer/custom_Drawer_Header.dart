@@ -49,13 +49,15 @@ class CustomDrawerHeader extends StatelessWidget {
                       fontWeight: FontWeight.w500),
                 ),
                 Text(
-                    userMenagerStore.isLoggedIn
-                        ? userMenagerStore.user.email
-                        : "Clique aqui.",
-                    style: TextStyle(
-                        color: Colors.purple[900],
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400)),
+                  userMenagerStore.isLoggedIn
+                      ? userMenagerStore.user.email
+                      : "Clique aqui.",
+                  style: TextStyle(
+                      color: Colors.purple[900],
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400),
+                  textAlign: TextAlign.center,
+                )
               ],
             ))
           ],

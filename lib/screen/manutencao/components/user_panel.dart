@@ -32,13 +32,6 @@ class UserPanel extends StatelessWidget {
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(
-                'Email ${manutencao.user.email}',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
               )
             ],
           ),

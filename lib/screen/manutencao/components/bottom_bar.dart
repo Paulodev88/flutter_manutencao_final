@@ -15,7 +15,7 @@ class BottomBar extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 26),
+            margin: const EdgeInsets.symmetric(horizontal: 75),
             height: 38,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
@@ -50,21 +50,6 @@ class BottomBar extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                    child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    height: 25,
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Comentar",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ))
               ],
             ),
           ),

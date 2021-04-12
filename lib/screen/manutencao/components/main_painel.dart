@@ -66,6 +66,10 @@ class MainPainel extends StatelessWidget {
             SizedBox(
               width: 8,
             ),
+            Text('|'),
+            SizedBox(
+              width: 8,
+            ),
             Text(
               "Corrente: ${manutencao.corrente} A",
               style: TextStyle(
@@ -80,13 +84,16 @@ class MainPainel extends StatelessWidget {
           color: Colors.grey[500],
         ),
         Text(
-          "Patrimônio: ${manutencao.patrimonio} A",
+          "Patrimônio: ${manutencao.patrimonio}",
           style: TextStyle(
               fontSize: 18,
               letterSpacing: 1,
               fontWeight: FontWeight.w400,
               color: Colors.grey[700]),
           maxLines: null,
+        ),
+        Divider(
+          color: Colors.grey[500],
         ),
         Text(
           "Tag: ${manutencao.tag} ",
