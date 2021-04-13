@@ -107,15 +107,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     color: Colors.grey[700],
                                     fontWeight: FontWeight.w700),
                               ),
-                              GestureDetector(
-                                child: Text(
-                                  "Esqueceu sua senha?",
-                                  style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.blue),
-                                ),
-                                onTap: () {},
-                              )
                             ],
                           )),
                       Observer(builder: (_) {
@@ -171,8 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 "Cadastra-se",
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
+                                    fontWeight: FontWeight.bold,
                                     color: Colors.blue,
-                                    fontSize: 16),
+                                    fontSize: 18),
                               ),
                             ),
                           ],
