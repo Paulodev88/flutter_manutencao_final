@@ -175,7 +175,7 @@ class _CreateScreenState extends State<CreateScreen> {
                                   initialValue: createStore.patrimonio,
                                   onChanged: createStore.setPatrimonio,
                                   decoration: InputDecoration(
-                                      labelText: "TAG",
+                                      labelText: "Data de Aquisição",
                                       labelStyle: labelStyle,
                                       contentPadding: contentPadding,
                                       errorText: createStore.tagError),
