@@ -96,7 +96,7 @@ class MainPainel extends StatelessWidget {
           color: Colors.grey[500],
         ),
         Text(
-          "Tag: ${manutencao.tag} ",
+          "Aquisição: ${manutencao.tag} ",
           style: TextStyle(
               fontSize: 18,
               letterSpacing: 1,
