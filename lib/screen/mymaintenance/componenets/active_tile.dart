@@ -5,6 +5,7 @@ import 'package:manutencao_parse/models/manutencao.dart';
 import 'package:manutencao_parse/screen/create/create_screen.dart';
 import 'package:manutencao_parse/screen/manutencao/manutecao_scree.dart';
 import 'package:manutencao_parse/stores/myMaintenance_store.dart';
+import 'package:manutencao_parse/helpers/extensions.dart';
 
 class ActiveTile extends StatelessWidget {
   ActiveTile(this.manutencao, this.maintenance);
@@ -56,7 +57,7 @@ class ActiveTile extends StatelessWidget {
                         ),
                         Text(name.unidadeName(manutencao.unidade.id)),
                         Text(
-                          '${manutencao.views} visitas',
+                          manutencao.created.formattedDate(),
                           style: TextStyle(
                             fontSize: 11,
                             color: Colors.grey[800],

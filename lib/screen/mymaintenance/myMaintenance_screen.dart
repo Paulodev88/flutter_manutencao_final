@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:manutencao_parse/componets/empty_card.dart';
 import 'package:manutencao_parse/screen/mymaintenance/componenets/active_tile.dart';
-import 'package:manutencao_parse/screen/mymaintenance/componenets/pending_tile.dart';
 import 'package:manutencao_parse/stores/myMaintenance_store.dart';
 
 class MyMaintenaceScreen extends StatefulWidget {
@@ -20,9 +19,6 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
   @override
   void initState() {
     super.initState();
-
-    tabController =
-        TabController(length: 2, vsync: this, initialIndex: widget.initialPage);
   }
 
   @override
@@ -42,13 +38,6 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
         appBar: AppBar(
           title: Text("Minhas Manutenções"),
           centerTitle: true,
-          bottom: TabBar(
-              controller: tabController,
-              indicatorColor: Colors.white,
-              tabs: [
-                Tab(child: Text("CONCLUÍDA")),
-                Tab(child: Text("EXCLUÍDA")),
-              ]),
         ),
         body: Observer(builder: (_) {
           if (maintenance.loading)
@@ -57,37 +46,19 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
                 valueColor: AlwaysStoppedAnimation(Colors.white),
               ),
             );
-          return TabBarView(
-            controller: tabController,
-            children: [
-              Observer(builder: (_) {
-                if (maintenance.activeMaintenance.isEmpty)
-                  return EmptyCard(
-                      "Você não possui nenhuma manutenção, vamos trabalhar!");
+          return Observer(builder: (_) {
+            if (maintenance.activeMaintenance.isEmpty)
+              return EmptyCard(
+                  "Você não possui nenhuma manutenção, vamos trabalhar!");
 
-                return ListView.builder(
-                  itemCount: maintenance.activeMaintenance.length,
-                  itemBuilder: (_, index) {
-                    return ActiveTile(
-                        maintenance.activeMaintenance[index], maintenance);
-                  },
-                );
-              }),
-              Observer(builder: (_) {
-                if (maintenance.pendenteMaintenance.isEmpty)
-                  return EmptyCard(
-                      "Você não possui nenhuma manutenção excluída!");
-
-                return ListView.builder(
-                  itemCount: maintenance.pendenteMaintenance.length,
-                  itemBuilder: (_, index) {
-                    return PendingTile(
-                        maintenance.pendenteMaintenance[index], maintenance);
-                  },
-                );
-              }),
-            ],
-          );
+            return ListView.builder(
+              itemCount: maintenance.activeMaintenance.length,
+              itemBuilder: (_, index) {
+                return ActiveTile(
+                    maintenance.activeMaintenance[index], maintenance);
+              },
+            );
+          });
         }),
       ),
     );
