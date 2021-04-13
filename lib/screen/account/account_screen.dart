@@ -10,102 +10,104 @@ import 'package:manutencao_parse/stores/user_menager_store.dart';
 class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.blue[900],
-            Colors.blue[200],
-          ],
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue[900],
+              Colors.blue[200],
+            ],
+          ),
         ),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Minha Conta"),
-          centerTitle: true,
-        ),
-        drawer: CustomDrawer(),
-        body: Center(
-          child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            margin: const EdgeInsets.symmetric(horizontal: 32),
-            elevation: 8,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  height: 140,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.center,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Observer(builder: (_) {
-                              return Text(
-                                GetIt.I<UserMenagerStore>().user.name,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Minha Conta"),
+            centerTitle: true,
+          ),
+          drawer: CustomDrawer(),
+          body: Center(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              margin: const EdgeInsets.symmetric(horizontal: 32),
+              elevation: 8,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 140,
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: Alignment.center,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Observer(builder: (_) {
+                                return Text(
+                                  GetIt.I<UserMenagerStore>().user.name,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.blue[900],
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                );
+                              }),
+                              Text(
+                                GetIt.I<UserMenagerStore>().user.email,
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 16,
                                   color: Colors.blue[900],
-                                  fontWeight: FontWeight.w900,
                                 ),
-                              );
-                            }),
-                            Text(
-                              GetIt.I<UserMenagerStore>().user.email,
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.blue[900],
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        // ignore: deprecated_member_use
-                        child: FlatButton(
-                          child: Text("EDITAR"),
-                          textColor: Colors.blue,
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => EditAccountScreen()));
-                          },
+                        Align(
+                          alignment: Alignment.topRight,
+                          // ignore: deprecated_member_use
+                          child: FlatButton(
+                            child: Text("EDITAR"),
+                            textColor: Colors.blue,
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => EditAccountScreen()));
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Divider(),
-                ListTile(
-                  title: Text(
-                    "Meus anúncios",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.w600),
+                  Divider(),
+                  ListTile(
+                    title: Text(
+                      "Meus anúncios",
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.w600),
+                    ),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => MyMaintenaceScreen()));
+                    },
                   ),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => MyMaintenaceScreen()));
-                  },
-                ),
-                ListTile(
-                  title: Text(
-                    "Favoritos",
-                    style: TextStyle(
-                        color: Colors.blue, fontWeight: FontWeight.w600),
+                  ListTile(
+                    title: Text(
+                      "Favoritos",
+                      style: TextStyle(
+                          color: Colors.blue, fontWeight: FontWeight.w600),
+                    ),
+                    trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => FavoritesScreen(hideDrawer: true)));
+                    },
                   ),
-                  trailing: Icon(Icons.keyboard_arrow_right),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => FavoritesScreen(hideDrawer: true)));
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

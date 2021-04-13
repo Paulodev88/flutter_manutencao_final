@@ -13,34 +13,36 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.blue[900],
-            Colors.blue[200],
-          ],
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue[900],
+              Colors.blue[200],
+            ],
+          ),
         ),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Favoritos"),
-          centerTitle: true,
-        ),
-        drawer: hideDrawer ? null : CustomDrawer(),
-        body: Observer(builder: (_) {
-          if (favoriteStore.favoriteList.isEmpty)
-            return EmptyCard("Nenhuma manutenção favoritada");
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Favoritos"),
+            centerTitle: true,
+          ),
+          drawer: hideDrawer ? null : CustomDrawer(),
+          body: Observer(builder: (_) {
+            if (favoriteStore.favoriteList.isEmpty)
+              return EmptyCard("Nenhuma manutenção favoritada");
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(2),
-            itemCount: favoriteStore.favoriteList.length,
-            itemBuilder: (_, index) =>
-                FavoriteTile(favoriteStore.favoriteList[index]),
-          );
-        }),
+            return ListView.builder(
+              padding: const EdgeInsets.all(2),
+              itemCount: favoriteStore.favoriteList.length,
+              itemBuilder: (_, index) =>
+                  FavoriteTile(favoriteStore.favoriteList[index]),
+            );
+          }),
+        ),
       ),
     );
   }

@@ -47,8 +47,7 @@ dependencies:
   url_launcher: ^6.0.3
   toggle_switch: ^0.1.8
   data_connection_checker: ^0.3.4
-  flutter_svg: ^0.21.0+1
- 
+  flutter_launcher_icons: "^0.7.3"
  
 
 dev_dependencies:
@@ -98,3 +97,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icons/fies.jpg"

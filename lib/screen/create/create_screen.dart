@@ -54,205 +54,208 @@ class _CreateScreenState extends State<CreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Colors.blue[900],
-              Colors.blue[200],
-            ],
-          ),
-        ),
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              editing ? "Editar Manutenção" : "Criar Manutenção",
-              style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.blue[900],
+                Colors.blue[200],
+              ],
             ),
-            centerTitle: true,
           ),
-          drawer: editing ? null : CustomDrawer(),
-          body: Container(
-            alignment: Alignment.center,
-            child: SingleChildScrollView(
-              child: Card(
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  elevation: 8,
-                  margin: EdgeInsets.symmetric(horizontal: 16),
-                  child: Observer(builder: (_) {
-                    if (createStore.loading)
-                      return Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            children: [
-                              Text(
-                                "Salvando manutencao",
-                                style: TextStyle(
-                                    color: Colors.purple, fontSize: 18),
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                              )
-                            ],
-                          ));
-                    else
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          ImagesField(createStore),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: createStore.nome,
-                              onChanged: createStore.setTitle,
-                              decoration: InputDecoration(
-                                  labelText: "Nome do equipamento",
-                                  labelStyle: labelStyle,
-                                  contentPadding: contentPadding,
-                                  errorText: createStore.nameError),
-                            );
-                          }),
-                          Observer(builder: (_) {
-                            return Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: TextFormField(
-                                    initialValue: createStore.tensao,
-                                    onChanged: createStore.setTensao,
-                                    decoration: InputDecoration(
-                                        labelText: "Tensão",
-                                        labelStyle: labelStyle,
-                                        contentPadding: contentPadding,
-                                        suffixText: "V",
-                                        errorText: createStore.tensaoError),
-                                    keyboardType: TextInputType.number,
-                                  ),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                editing ? "Editar Manutenção" : "Criar Manutenção",
+                style: TextStyle(color: Colors.white),
+              ),
+              centerTitle: true,
+            ),
+            drawer: editing ? null : CustomDrawer(),
+            body: Container(
+              alignment: Alignment.center,
+              child: SingleChildScrollView(
+                child: Card(
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
+                    elevation: 8,
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    child: Observer(builder: (_) {
+                      if (createStore.loading)
+                        return Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Salvando manutencao",
+                                  style: TextStyle(
+                                      color: Colors.purple, fontSize: 18),
                                 ),
-                                SizedBox(
-                                  width: 10,
+                                const SizedBox(
+                                  height: 16,
                                 ),
-                                Expanded(
-                                  child: TextFormField(
-                                    initialValue: createStore.corrente,
-                                    onChanged: createStore.setCorrente,
-                                    decoration: InputDecoration(
-                                        labelText: "Corrente",
-                                        labelStyle: labelStyle,
-                                        contentPadding: contentPadding,
-                                        suffixText: "A",
-                                        errorText: createStore.correnteError),
-                                    keyboardType: TextInputType.number,
-                                  ),
-                                ),
+                                CircularProgressIndicator(
+                                  valueColor:
+                                      AlwaysStoppedAnimation(Colors.blue),
+                                )
                               ],
-                            );
-                          }),
-                          Observer(
-                            builder: (_) {
+                            ));
+                      else
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            ImagesField(createStore),
+                            Observer(builder: (_) {
                               return TextFormField(
-                                initialValue: createStore.patrimonio,
-                                onChanged: createStore.setPatrimonio,
+                                initialValue: createStore.nome,
+                                onChanged: createStore.setTitle,
                                 decoration: InputDecoration(
-                                    labelText: "Patrimônio",
+                                    labelText: "Nome do equipamento",
                                     labelStyle: labelStyle,
                                     contentPadding: contentPadding,
-                                    errorText: createStore.patrimonioError),
+                                    errorText: createStore.nameError),
                               );
-                            },
-                          ),
-                          Observer(
-                            builder: (_) {
-                              return TextFormField(
-                                initialValue: createStore.patrimonio,
-                                onChanged: createStore.setPatrimonio,
-                                decoration: InputDecoration(
-                                    labelText: "TAG",
-                                    labelStyle: labelStyle,
-                                    contentPadding: contentPadding,
-                                    errorText: createStore.tagError),
+                            }),
+                            Observer(builder: (_) {
+                              return Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: TextFormField(
+                                      initialValue: createStore.tensao,
+                                      onChanged: createStore.setTensao,
+                                      decoration: InputDecoration(
+                                          labelText: "Tensão",
+                                          labelStyle: labelStyle,
+                                          contentPadding: contentPadding,
+                                          suffixText: "V",
+                                          errorText: createStore.tensaoError),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      initialValue: createStore.corrente,
+                                      onChanged: createStore.setCorrente,
+                                      decoration: InputDecoration(
+                                          labelText: "Corrente",
+                                          labelStyle: labelStyle,
+                                          contentPadding: contentPadding,
+                                          suffixText: "A",
+                                          errorText: createStore.correnteError),
+                                      keyboardType: TextInputType.number,
+                                    ),
+                                  ),
+                                ],
                               );
-                            },
-                          ),
-                          CategoryField(createStore),
-                          UnidadeField(createStore),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: createStore.problema,
-                              onChanged: createStore.setProblema,
-                              maxLines: null,
-                              decoration: InputDecoration(
-                                  labelText: "Problema",
-                                  labelStyle: labelStyle,
-                                  contentPadding: contentPadding,
-                                  errorText: createStore.probelmaError),
-                            );
-                          }),
-                          Observer(
-                            builder: (_) {
+                            }),
+                            Observer(
+                              builder: (_) {
+                                return TextFormField(
+                                  initialValue: createStore.patrimonio,
+                                  onChanged: createStore.setPatrimonio,
+                                  decoration: InputDecoration(
+                                      labelText: "Patrimônio",
+                                      labelStyle: labelStyle,
+                                      contentPadding: contentPadding,
+                                      errorText: createStore.patrimonioError),
+                                );
+                              },
+                            ),
+                            Observer(
+                              builder: (_) {
+                                return TextFormField(
+                                  initialValue: createStore.patrimonio,
+                                  onChanged: createStore.setPatrimonio,
+                                  decoration: InputDecoration(
+                                      labelText: "TAG",
+                                      labelStyle: labelStyle,
+                                      contentPadding: contentPadding,
+                                      errorText: createStore.tagError),
+                                );
+                              },
+                            ),
+                            CategoryField(createStore),
+                            UnidadeField(createStore),
+                            Observer(builder: (_) {
                               return TextFormField(
-                                initialValue: createStore.solucao,
-                                onChanged: createStore.setSolucao,
+                                initialValue: createStore.problema,
+                                onChanged: createStore.setProblema,
                                 maxLines: null,
                                 decoration: InputDecoration(
-                                    labelText: "Solução",
+                                    labelText: "Problema",
                                     labelStyle: labelStyle,
                                     contentPadding: contentPadding,
-                                    errorText: createStore.solucaoError),
+                                    errorText: createStore.probelmaError),
                               );
-                            },
-                          ),
-                          Observer(builder: (_) {
-                            return TextFormField(
-                              initialValue: createStore.observacao,
-                              onChanged: createStore.setObservacao,
-                              maxLines: null,
-                              decoration: InputDecoration(
-                                  labelText: "Observação",
-                                  labelStyle: labelStyle,
-                                  contentPadding: contentPadding,
-                                  errorText: createStore.observacaoError),
-                            );
-                          }),
-                          Observer(builder: (_) {
-                            return ErrorBox(
-                              message: createStore.error,
-                            );
-                          }),
-                          Observer(
-                            builder: (_) {
-                              return SizedBox(
-                                height: 50,
-                                child: GestureDetector(
-                                  onTap: createStore.invalidSendPressed,
-                                  // ignore: deprecated_member_use
-                                  child: RaisedButton(
-                                    materialTapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    onPressed: createStore.sendPressed,
-                                    child: Text(
-                                      "Salvar",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18),
+                            }),
+                            Observer(
+                              builder: (_) {
+                                return TextFormField(
+                                  initialValue: createStore.solucao,
+                                  onChanged: createStore.setSolucao,
+                                  maxLines: null,
+                                  decoration: InputDecoration(
+                                      labelText: "Solução",
+                                      labelStyle: labelStyle,
+                                      contentPadding: contentPadding,
+                                      errorText: createStore.solucaoError),
+                                );
+                              },
+                            ),
+                            Observer(builder: (_) {
+                              return TextFormField(
+                                initialValue: createStore.observacao,
+                                onChanged: createStore.setObservacao,
+                                maxLines: null,
+                                decoration: InputDecoration(
+                                    labelText: "Observação",
+                                    labelStyle: labelStyle,
+                                    contentPadding: contentPadding,
+                                    errorText: createStore.observacaoError),
+                              );
+                            }),
+                            Observer(builder: (_) {
+                              return ErrorBox(
+                                message: createStore.error,
+                              );
+                            }),
+                            Observer(
+                              builder: (_) {
+                                return SizedBox(
+                                  height: 50,
+                                  child: GestureDetector(
+                                    onTap: createStore.invalidSendPressed,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      materialTapTargetSize:
+                                          MaterialTapTargetSize.shrinkWrap,
+                                      onPressed: createStore.sendPressed,
+                                      child: Text(
+                                        "Salvar",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 18),
+                                      ),
+                                      color: Colors.purple,
+                                      disabledColor: Colors.purple[100],
                                     ),
-                                    color: Colors.purple,
-                                    disabledColor: Colors.purple[100],
                                   ),
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      );
-                  })),
+                                );
+                              },
+                            )
+                          ],
+                        );
+                    })),
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

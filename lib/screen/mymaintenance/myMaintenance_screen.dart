@@ -23,43 +23,45 @@ class _MyMaintenaceScreenState extends State<MyMaintenaceScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Colors.blue[900],
-            Colors.blue[200],
-          ],
+    return SafeArea(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.blue[900],
+              Colors.blue[200],
+            ],
+          ),
         ),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Minhas Manutenções"),
-          centerTitle: true,
-        ),
-        body: Observer(builder: (_) {
-          if (maintenance.loading)
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation(Colors.white),
-              ),
-            );
-          return Observer(builder: (_) {
-            if (maintenance.activeMaintenance.isEmpty)
-              return EmptyCard(
-                  "Você não possui nenhuma manutenção, vamos trabalhar!");
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text("Minhas Manutenções"),
+            centerTitle: true,
+          ),
+          body: Observer(builder: (_) {
+            if (maintenance.loading)
+              return Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation(Colors.white),
+                ),
+              );
+            return Observer(builder: (_) {
+              if (maintenance.activeMaintenance.isEmpty)
+                return EmptyCard(
+                    "Você não possui nenhuma manutenção, vamos trabalhar!");
 
-            return ListView.builder(
-              itemCount: maintenance.activeMaintenance.length,
-              itemBuilder: (_, index) {
-                return ActiveTile(
-                    maintenance.activeMaintenance[index], maintenance);
-              },
-            );
-          });
-        }),
+              return ListView.builder(
+                itemCount: maintenance.activeMaintenance.length,
+                itemBuilder: (_, index) {
+                  return ActiveTile(
+                      maintenance.activeMaintenance[index], maintenance);
+                },
+              );
+            });
+          }),
+        ),
       ),
     );
   }

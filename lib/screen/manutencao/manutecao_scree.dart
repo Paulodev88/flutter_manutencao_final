@@ -20,68 +20,70 @@ class ManutencaoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.blue[800],
-        title: Text("Manutenção"),
-        centerTitle: true,
-        actions: [
-          if (manutencao.status == ManutencaoStatus.CONCLUIDA &&
-              userMenagerStore.isLoggedIn)
-            Observer(builder: (_) {
-              return IconButton(
-                icon: Icon(
-                  favoriteStore.favoriteList.any((a) => a.id == manutencao.id)
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                ),
-                onPressed: () => favoriteStore.toggleFavorite(manutencao),
-              );
-            })
-        ],
-      ),
-      body: Stack(children: [
-        ListView(
-          children: [
-            Container(
-              height: 300,
-              child: Carousel(
-                images: manutencao.image
-                    .map((url) => CachedNetworkImageProvider(url))
-                    .toList(),
-                dotSize: 4,
-                dotBgColor: Colors.transparent,
-                dotColor: Colors.blue,
-                autoplay: false,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  MainPainel(manutencao),
-                  Divider(
-                    color: Colors.grey[500],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.blue[800],
+          title: Text("Manutenção"),
+          centerTitle: true,
+          actions: [
+            if (manutencao.status == ManutencaoStatus.CONCLUIDA &&
+                userMenagerStore.isLoggedIn)
+              Observer(builder: (_) {
+                return IconButton(
+                  icon: Icon(
+                    favoriteStore.favoriteList.any((a) => a.id == manutencao.id)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
                   ),
-                  DescriptionPanel(manutencao),
-                  Divider(
-                    color: Colors.grey[500],
-                  ),
-                  UserPanel(manutencao),
-                  SizedBox(
-                    height: manutencao.status == ManutencaoStatus.PENDENTE
-                        ? 16
-                        : 120,
-                  )
-                ],
-              ),
-            )
+                  onPressed: () => favoriteStore.toggleFavorite(manutencao),
+                );
+              })
           ],
         ),
-        BottomBar(manutencao),
-      ]),
+        body: Stack(children: [
+          ListView(
+            children: [
+              Container(
+                height: 300,
+                child: Carousel(
+                  images: manutencao.image
+                      .map((url) => CachedNetworkImageProvider(url))
+                      .toList(),
+                  dotSize: 4,
+                  dotBgColor: Colors.transparent,
+                  dotColor: Colors.blue,
+                  autoplay: false,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MainPainel(manutencao),
+                    Divider(
+                      color: Colors.grey[500],
+                    ),
+                    DescriptionPanel(manutencao),
+                    Divider(
+                      color: Colors.grey[500],
+                    ),
+                    UserPanel(manutencao),
+                    SizedBox(
+                      height: manutencao.status == ManutencaoStatus.PENDENTE
+                          ? 16
+                          : 120,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+          BottomBar(manutencao),
+        ]),
+      ),
     );
   }
 }

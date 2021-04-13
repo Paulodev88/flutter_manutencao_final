@@ -36,16 +36,18 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     //Tela Principal
-    return Scaffold(
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: <Widget>[
-          HomeScreen(),
-          CreateScreen(),
-          FavoritesScreen(),
-          AccountScreen(),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: PageView(
+          controller: pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            HomeScreen(),
+            CreateScreen(),
+            FavoritesScreen(),
+            AccountScreen(),
+          ],
+        ),
       ),
     );
   }
