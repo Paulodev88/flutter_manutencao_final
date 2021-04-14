@@ -128,8 +128,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             margin: const EdgeInsets.only(top: 20, bottom: 20),
                             // ignore: deprecated_member_use
                             child: RaisedButton(
-                              color: Colors.purple,
-                              disabledColor: Colors.purple[100],
+                              color: Colors.blue,
+                              disabledColor: Colors.blue[200],
                               onPressed: loginStore.loginPressed,
                               child: loginStore.loading
                                   ? CircularProgressIndicator(
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       builder: (_) => SignUpScreen()));
                                 },
                                 child: Text(
-                                  "Cadastra-se",
+                                  "Cadastre-se",
                                   style: TextStyle(
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold,

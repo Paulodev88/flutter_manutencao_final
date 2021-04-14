@@ -93,7 +93,7 @@ class _CreateScreenState extends State<CreateScreen> {
                                 Text(
                                   "Salvando manutencao",
                                   style: TextStyle(
-                                      color: Colors.purple, fontSize: 18),
+                                      color: Colors.blue, fontSize: 18),
                                 ),
                                 const SizedBox(
                                   height: 16,
@@ -243,8 +243,8 @@ class _CreateScreenState extends State<CreateScreen> {
                                         style: TextStyle(
                                             color: Colors.white, fontSize: 18),
                                       ),
-                                      color: Colors.purple,
-                                      disabledColor: Colors.purple[100],
+                                      color: Colors.blue,
+                                      disabledColor: Colors.blue[200],
                                     ),
                                   ),
                                 );

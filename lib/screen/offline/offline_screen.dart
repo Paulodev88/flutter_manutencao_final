@@ -38,7 +38,7 @@ class _OfflineScreenState extends State<OfflineScreen> {
           ),
           child: Scaffold(
             appBar: AppBar(
-              title: Text('Manutenção SCI'),
+              title: Text('Manutenções da SCI'),
               centerTitle: true,
               automaticallyImplyLeading: false,
             ),

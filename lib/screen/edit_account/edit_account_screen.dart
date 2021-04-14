@@ -53,7 +53,7 @@ class EditAccountScreen extends StatelessWidget {
                                 labels: ['Técnico', 'Administrativo'],
                                 cornerRadius: 20,
                                 activeBgColor: Colors.blue,
-                                inactiveBgColor: Colors.grey,
+                                inactiveBgColor: Colors.blue[200],
                                 activeFgColor: Colors.white,
                                 inactiveFgColor: Colors.white,
                                 initialLabelIndex: store.userType.index,

@@ -161,8 +161,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     const EdgeInsets.only(top: 20, bottom: 20),
                                 // ignore: deprecated_member_use
                                 child: RaisedButton(
-                                  color: Colors.purple,
-                                  disabledColor: Colors.purple[100],
+                                  color: Colors.blue,
+                                  disabledColor: Colors.blue[200],
                                   onPressed: signupStore.signupPressed,
                                   child: signupStore.loading
                                       ? CircularProgressIndicator(
